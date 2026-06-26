@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de Inscrição — TC9 | Tratamento de Choque</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!--
+  ========================================================================
+  GUIA RÁPIDO DE CONEXÃO COM GOOGLE FORMS — leia o arquivo
+  "guia-conexao-formulario.md" incluído nesta pasta para o passo a passo
+  completo. Resumo: crie um Google Form espelhando estas mesmas seções,
+  pegue o "link pré-preenchido" para descobrir os entry.IDs de cada campo,
+  e substitua os valores no objeto ENTRY_IDS lá no final deste arquivo.
+  ========================================================================
+-->
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark"></span>
+      <span><b>TC·</b><small>ADM Itaú de Minas</small></span>
+    </a>
+    <div class="navlinks">
+      <a href="index.html#sobre">O que é</a>
+      <a href="index.html#programacao">Programação</a>
+      <a href="index.html#testemunhos">Testemunhos</a>
+      <a href="index.html#inscricoes">Inscrições</a>
+      <a href="loja.html">Loja</a>
+      <a href="contribua.html">Contribua</a>
+    </div>
+    <a href="index.html#inscricoes" class="btn btn-line" style="padding:11px 22px; font-size:13px;">← Voltar</a>
+  </div>
+</nav>
+
+<header class="hero" style="padding:70px 0 60px;">
+  <div class="wrap">
+    <p class="tag-pill">ETAPA 2 DE 2</p>
+    <h1 style="margin-top:22px; font-size:clamp(34px,5vw,52px);">Ficha de <em>Inscrição</em></h1>
+    <p class="lede" style="margin-top:18px;">Preencha com atenção. Estes dados ajudam a equipe do TC9 a cuidar de você com segurança durante os três dias de tratamento — da distribuição dos dormitórios ao acompanhamento de saúde.</p>
+  </div>
+</header>
+
+<section class="section section--paper">
+  <div class="wrap" style="max-width:840px;">
+
+    <div class="note-box">
+      <b>Antes de preencher:</b> sua vaga só é confirmada após o pagamento da inscrição. Se ainda não pagou, <a href="index.html#inscricoes" style="color:var(--gold); text-decoration:underline;">volte para a página de inscrições</a> primeiro.
+    </div>
+
+    <form id="form-tc9">
+
+      <!-- ===================== SEÇÃO 1 ===================== -->
+      <div class="form-section">
+        <div class="form-section-head"><span class="num">01</span><h3>Dados pessoais</h3></div>
+        <p class="hint">Informações de identificação e contato.</p>
+
+        <div class="field-grid">
+          <div class="field full">
+            <label>Nome completo *</label>
+            <input type="text" name="nome" required>
+          </div>
+          <div class="field">
+            <label>Data de nascimento *</label>
+            <input type="date" name="data_nascimento" required>
+          </div>
+          <div class="field">
+            <label>Idade *</label>
+            <input type="number" name="idade" min="0" required>
+          </div>
+          <div class="field">
+            <label>CPF *</label>
+            <input type="text" name="cpf" required>
+          </div>
+          <div class="field">
+            <label>Sexo * <span class="opt">(para organização dos dormitórios)</span></label>
+            <select name="sexo" required>
+              <option value="">Selecione</option>
+              <option>Feminino</option>
+              <option>Masculino</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Telefone / WhatsApp *</label>
+            <input type="tel" name="telefone" required>
+          </div>
+          <div class="field">
+            <label>E-mail *</label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="field full">
+            <label>Endereço completo *</label>
+            <input type="text" name="endereco" required>
+          </div>
+          <div class="field">
+            <label>Cidade *</label>
+            <input type="text" name="cidade" required>
+          </div>
+          <div class="field">
+            <label>Igreja / Congregação que frequenta</label>
+            <input type="text" name="igreja">
+          </div>
+          <div class="field full">
+            <label>Nome do contato de emergência *</label>
+            <input type="text" name="emergencia_nome" required>
+          </div>
+          <div class="field">
+            <label>Telefone do contato de emergência *</label>
+            <input type="tel" name="emergencia_telefone" required>
+          </div>
+          <div class="field">
+            <label>Grau de parentesco *</label>
+            <input type="text" name="emergencia_parentesco" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== SEÇÃO 2 ===================== -->
+      <div class="form-section">
+        <div class="form-section-head"><span class="num">02</span><h3>Acomodação no dormitório</h3></div>
+        <p class="hint">Usado exclusivamente para organizar camas e beliches da Fazenda Canaã com segurança e conforto.</p>
+
+        <div class="field-grid cols-3">
+          <div class="field">
+            <label>Peso (kg) *</label>
+            <input type="number" name="peso" required>
+          </div>
+          <div class="field">
+            <label>Altura (cm) *</label>
+            <input type="number" name="altura" required>
+          </div>
+          <div class="field">
+            <label>Precisa de cama de baixo no beliche? *</label>
+            <select name="cama_baixo" required>
+              <option value="">Selecione</option>
+              <option>Não</option>
+              <option>Sim</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label>Se sim, qual o motivo? <span class="opt">(opcional)</span></label>
+            <input type="text" name="cama_baixo_motivo">
+          </div>
+          <div class="field full">
+            <label>Precisa de algum cuidado especial no dormitório? <span class="opt">(opcional)</span></label>
+            <textarea name="cuidado_dormitorio" placeholder="Ex: dificuldade de locomoção, sensibilidade a barulho, etc."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== SEÇÃO 3 ===================== -->
+      <div class="form-section">
+        <div class="form-section-head"><span class="num">03</span><h3>Saúde</h3></div>
+        <p class="hint">Dados sensíveis, vistos apenas pela equipe de coordenação do TC9, para sua segurança durante o tratamento.</p>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>Possui algum problema de saúde? *</label>
+            <select name="problema_saude" required>
+              <option value="">Selecione</option>
+              <option>Não</option>
+              <option>Sim</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Possui alguma alergia? *</label>
+            <select name="alergia" required>
+              <option value="">Selecione</option>
+              <option>Não</option>
+              <option>Sim</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label>Se sim, descreva o problema de saúde <span class="opt">(opcional se respondeu "Não" acima)</span></label>
+            <textarea name="problema_saude_detalhe"></textarea>
+          </div>
+          <div class="field full">
+            <label>Se sim, descreva a(s) alergia(s) <span class="opt">(alimentar, medicamentosa, etc.)</span></label>
+            <textarea name="alergia_detalhe"></textarea>
+          </div>
+
+          <div class="field">
+            <label>Faz uso de medicação de uso contínuo (diária)? *</label>
+            <select name="medicacao_continua" required>
+              <option value="">Selecione</option>
+              <option>Não</option>
+              <option>Sim</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Faz uso de medicação controlada? *</label>
+            <select name="medicacao_controlada" required>
+              <option value="">Selecione</option>
+              <option>Não</option>
+              <option>Sim</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label>Liste as medicações de uso contínuo e os horários <span class="opt">(ex: Losartana — 8h e 20h)</span></label>
+            <textarea name="medicacao_continua_detalhe" placeholder="Nome da medicação — horário(s) de uso"></textarea>
+          </div>
+          <div class="field full">
+            <label>Liste as medicações controladas e os horários <span class="opt">(ex: Rivotril — 22h)</span></label>
+            <textarea name="medicacao_controlada_detalhe" placeholder="Nome da medicação — horário(s) de uso"></textarea>
+          </div>
+          <div class="field full">
+            <label>Necessita de algum acompanhamento médico especial durante o evento? <span class="opt">(opcional)</span></label>
+            <textarea name="acompanhamento_especial"></textarea>
+          </div>
+          <div class="field">
+            <label>Possui convênio médico? <span class="opt">(opcional)</span></label>
+            <input type="text" name="convenio" placeholder="Nome do convênio, se houver">
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== SEÇÃO 4 — TERMOS ===================== -->
+      <div class="form-section">
+        <div class="form-section-head"><span class="num">04</span><h3>Termos e consentimentos</h3></div>
+        <p class="hint">Leia com atenção. A confirmação da sua inscrição depende da concordância com os termos abaixo.</p>
+
+        <div class="consent">
+          <input type="checkbox" id="t1" name="termo_pagamento" required>
+          <label for="t1"><b>Política de pagamento e cancelamento.</b> Estou ciente de que, uma vez efetuado o pagamento da inscrição do TC9, não há reembolso, mesmo em caso de desistência ou ausência. *</label>
+        </div>
+        <div class="consent">
+          <input type="checkbox" id="t2" name="termo_ministracao" required>
+          <label for="t2"><b>Ministração espiritual.</b> Estou ciente de que o TC9 inclui momentos de oração, ministração e imposição de mãos, conduzidos pela equipe da ADM Itaú de Minas, e concordo em recebê-los durante o tratamento. *</label>
+        </div>
+        <div class="consent">
+          <input type="checkbox" id="t3" name="termo_lgpd" required>
+          <label for="t3"><b>Tratamento de dados sensíveis (LGPD).</b> Autorizo o uso dos dados de saúde e medicação informados nesta ficha exclusivamente para fins de cuidado e organização do TC9, com acesso restrito à equipe de coordenação. *</label>
+        </div>
+        <div class="consent">
+          <input type="checkbox" id="t4" name="termo_imagem">
+          <label for="t4"><b>Uso de imagem </b><span class="opt">(opcional).</span> Autorizo o uso de fotos e vídeos com a minha imagem, feitos durante o TC9, para divulgação do projeto.</label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-gold btn-block" style="padding:18px;">Enviar Ficha de Inscrição</button>
+      <p id="form-msg" style="text-align:center; margin-top:18px; font-size:14px; color:var(--stone); display:none;"></p>
+    </form>
+
+    <div id="form-success" style="display:none; text-align:center; padding:60px 20px;">
+      <div class="eyebrow" style="justify-content:center;">Ficha recebida</div>
+      <h2 style="font-size:32px;">Sua inscrição está completa.</h2>
+      <p class="lede mx-auto" style="margin-top:14px;">A equipe do TC9 entrará em contato pelo WhatsApp informado, com os próximos passos antes do dia 24 de julho.</p>
+      <a href="index.html" class="btn btn-line" style="margin-top:30px; display:inline-flex;">Voltar para o início</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom" style="border-top:none; padding-top:0;">
+      <span>© 2026 ADM Itaú de Minas — TC Tratamento de Choque</span>
+      <span>Dados tratados conforme a LGPD</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========================================================================
+   CONEXÃO COM GOOGLE FORMS — ver guia-conexao-formulario.md para o passo a passo.
+
+   1. Substitua GOOGLE_FORM_ACTION pela action URL do seu Google Form
+      (termina em ".../formResponse").
+   2. Substitua cada "ENTRY_ID_AQUI" abaixo pelo entry.NNNNNNN real
+      do campo correspondente no seu Google Form.
+   3. Enquanto isso não for feito, o formulário mostra a mensagem de
+      sucesso mas NÃO envia os dados para lugar nenhum — configure antes
+      de publicar o site.
+   ======================================================================== */
+
+const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/SEU_FORM_ID_AQUI/formResponse";
+
+const ENTRY_IDS = {
+  nome: "ENTRY_ID_AQUI",
+  data_nascimento: "ENTRY_ID_AQUI",
+  idade: "ENTRY_ID_AQUI",
+  cpf: "ENTRY_ID_AQUI",
+  sexo: "ENTRY_ID_AQUI",
+  telefone: "ENTRY_ID_AQUI",
+  email: "ENTRY_ID_AQUI",
+  endereco: "ENTRY_ID_AQUI",
+  cidade: "ENTRY_ID_AQUI",
+  igreja: "ENTRY_ID_AQUI",
+  emergencia_nome: "ENTRY_ID_AQUI",
+  emergencia_telefone: "ENTRY_ID_AQUI",
+  emergencia_parentesco: "ENTRY_ID_AQUI",
+  peso: "ENTRY_ID_AQUI",
+  altura: "ENTRY_ID_AQUI",
+  cama_baixo: "ENTRY_ID_AQUI",
+  cama_baixo_motivo: "ENTRY_ID_AQUI",
+  cuidado_dormitorio: "ENTRY_ID_AQUI",
+  problema_saude: "ENTRY_ID_AQUI",
+  problema_saude_detalhe: "ENTRY_ID_AQUI",
+  alergia: "ENTRY_ID_AQUI",
+  alergia_detalhe: "ENTRY_ID_AQUI",
+  medicacao_continua: "ENTRY_ID_AQUI",
+  medicacao_continua_detalhe: "ENTRY_ID_AQUI",
+  medicacao_controlada: "ENTRY_ID_AQUI",
+  medicacao_controlada_detalhe: "ENTRY_ID_AQUI",
+  acompanhamento_especial: "ENTRY_ID_AQUI",
+  convenio: "ENTRY_ID_AQUI",
+  termo_pagamento: "ENTRY_ID_AQUI",
+  termo_ministracao: "ENTRY_ID_AQUI",
+  termo_lgpd: "ENTRY_ID_AQUI",
+  termo_imagem: "ENTRY_ID_AQUI",
+};
+
+document.getElementById("form-tc9").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData();
+  let configured = true;
+
+  for (const [fieldName, entryId] of Object.entries(ENTRY_IDS)) {
+    if (entryId === "ENTRY_ID_AQUI") configured = false;
+    const el = form.elements[fieldName];
+    if (!el) continue;
+    let value = "";
+    if (el.type === "checkbox") value = el.checked ? "Sim" : "Não";
+    else value = el.value;
+    data.append(entryId, value);
+  }
+
+  const finish = () => {
+    form.style.display = "none";
+    document.getElementById("form-success").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  if (!configured || GOOGLE_FORM_ACTION.includes("SEU_FORM_ID_AQUI")) {
+    console.warn("TC9: ENTRY_IDS / GOOGLE_FORM_ACTION ainda não configurados — ver guia-conexao-formulario.md");
+    finish();
+    return;
+  }
+
+  fetch(GOOGLE_FORM_ACTION, { method: "POST", mode: "no-cors", body: data })
+    .then(finish)
+    .catch(finish);
+});
+</script>
+
+</body>
+</html>
