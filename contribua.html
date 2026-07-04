@@ -23,9 +23,58 @@
       <a href="loja.html">Loja</a>
       <a href="contribua.html" class="current">Contribua</a>
     </div>
-    <a href="inscricao.html" class="btn btn-gold" style="padding:11px 22px; font-size:13px;">Inscreva-se</a>
+    <a href="inscricao.html" class="btn btn-gold" style="padding:11px 22px; font-size:13px; white-space:nowrap;">Inscreva-se</a>
+    <button class="navtoggle" id="navtoggle" aria-label="Menu" style="background:none;border:none;cursor:pointer;padding:8px;display:none;flex-direction:column;gap:5px;">
+      <span style="display:block;width:24px;height:2px;background:var(--ivory);transition:.3s;"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--ivory);transition:.3s;"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--ivory);transition:.3s;"></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div id="mobile-menu" style="display:none; position:fixed; top:76px; left:0; right:0; bottom:0; background:rgba(21,20,15,0.97); z-index:49; padding:32px 28px; flex-direction:column; gap:0; overflow-y:auto;">
+  <a href="index.html#sobre" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">O que é</a>
+  <a href="index.html#programacao" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Programação</a>
+  <a href="index.html#testemunhos" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Testemunhos</a>
+  <a href="galeria.html" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Galeria</a>
+  <a href="index.html#inscricoes" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Inscrições</a>
+  <a href="loja.html" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Loja</a>
+  <a href="contribua.html" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Contribua</a>
+  <a href="servir.html" style="color:var(--gold-soft);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;font-weight:600;">⚔️ Quero Servir</a>
+  <a href="inscricao.html" class="btn btn-gold" style="margin-top:28px;justify-content:center;font-size:16px;padding:16px;">Inscreva-se no TC9</a>
+</div>
+
+<script>
+(function(){
+  var toggle = document.getElementById('navtoggle');
+  var menu = document.getElementById('mobile-menu');
+  var open = false;
+  function updateToggle(){
+    if(window.innerWidth <= 880){
+      toggle.style.display = 'flex';
+    } else {
+      toggle.style.display = 'none';
+      menu.style.display = 'none';
+      open = false;
+    }
+  }
+  toggle.addEventListener('click', function(){
+    open = !open;
+    menu.style.display = open ? 'flex' : 'none';
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      open = false;
+      menu.style.display = 'none';
+      document.body.style.overflow = '';
+    });
+  });
+  window.addEventListener('resize', updateToggle);
+  updateToggle();
+})();
+</script>
 
 <header class="hero" style="padding:90px 0 70px;">
   <div class="wrap">
