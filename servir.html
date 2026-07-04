@@ -111,166 +111,28 @@
 
 <!-- FICHA -->
 <section class="section section--paper">
-  <div class="wrap" style="max-width:840px;">
+  <div class="wrap" style="max-width:680px; text-align:center;">
 
-    <form id="form-servir">
-
-      <!-- ===== SEÇÃO 1 — DADOS PESSOAIS ===== -->
-      <div class="form-section">
-        <div class="form-section-head"><span class="num">01</span><h3>Dados pessoais</h3></div>
-        <p class="hint">Informações de identificação e contato.</p>
-        <div class="field-grid">
-          <div class="field full"><label>Nome completo *</label><input type="text" name="nome" required></div>
-          <div class="field"><label>Data de nascimento *</label><input type="date" name="data_nascimento" required></div>
-          <div class="field"><label>Idade *</label><input type="number" name="idade" min="0" required></div>
-          <div class="field"><label>CPF *</label><input type="text" name="cpf" required></div>
-          <div class="field"><label>Sexo * <span class="opt">(para organização dos dormitórios)</span></label>
-            <select name="sexo" required><option value="">Selecione</option><option>Feminino</option><option>Masculino</option></select>
-          </div>
-          <div class="field"><label>Telefone / WhatsApp *</label><input type="tel" name="telefone" required></div>
-          <div class="field"><label>E-mail *</label><input type="email" name="email" required></div>
-          <div class="field full"><label>Endereço completo *</label><input type="text" name="endereco" required></div>
-          <div class="field"><label>Cidade *</label><input type="text" name="cidade" required></div>
-          <div class="field"><label>Igreja / Congregação que frequenta</label><input type="text" name="igreja"></div>
-          <div class="field full"><label>Nome do contato de emergência *</label><input type="text" name="emergencia_nome" required></div>
-          <div class="field"><label>Telefone do contato de emergência *</label><input type="tel" name="emergencia_telefone" required></div>
-          <div class="field"><label>Grau de parentesco *</label><input type="text" name="emergencia_parentesco" required></div>
-        </div>
-      </div>
-
-      <!-- ===== SEÇÃO 2 — ACOMODAÇÃO ===== -->
-      <div class="form-section">
-        <div class="form-section-head"><span class="num">02</span><h3>Acomodação durante o TC</h3></div>
-        <p class="hint">Nos ajude a organizar a logística de hospedagem da equipe.</p>
-        <div class="field-grid">
-          <div class="field"><label>Peso (kg) *</label><input type="number" name="peso" required></div>
-          <div class="field"><label>Altura (cm) *</label><input type="number" name="altura" required></div>
-          <div class="field full">
-            <label>Como será sua permanência durante o TC? *</label>
-            <select name="acomodacao" required>
-              <option value="">Selecione</option>
-              <option>Dormirei no Retiro Canaã durante os três dias</option>
-              <option>Irei e voltarei todos os dias — não dormirei no Retiro</option>
-              <option>Ainda não sei — preciso confirmar com a coordenação</option>
-            </select>
-          </div>
-          <div class="field full">
-            <label>Precisa de algum cuidado especial no dormitório? <span class="opt">(opcional)</span></label>
-            <textarea name="cuidado_dormitorio" placeholder="Ex: dificuldade de locomoção, sensibilidade a barulho, etc."></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== SEÇÃO 3 — SAÚDE ===== -->
-      <div class="form-section">
-        <div class="form-section-head"><span class="num">03</span><h3>Saúde</h3></div>
-        <p class="hint">Dados sensíveis, vistos apenas pela equipe de coordenação do TC, para sua segurança durante o serviço.</p>
-        <div class="field-grid">
-          <div class="field"><label>Possui algum problema de saúde? *</label>
-            <select name="problema_saude" required><option value="">Selecione</option><option>Não</option><option>Sim</option></select>
-          </div>
-          <div class="field"><label>Possui alguma alergia? *</label>
-            <select name="alergia" required><option value="">Selecione</option><option>Não</option><option>Sim</option></select>
-          </div>
-          <div class="field full"><label>Se sim, descreva o problema de saúde <span class="opt">(opcional se respondeu "Não")</span></label><textarea name="problema_saude_detalhe"></textarea></div>
-          <div class="field full"><label>Se sim, descreva a(s) alergia(s) <span class="opt">(alimentar, medicamentosa, etc.)</span></label><textarea name="alergia_detalhe"></textarea></div>
-          <div class="field"><label>Faz uso de medicação de uso contínuo (diária)? *</label>
-            <select name="medicacao_continua" required><option value="">Selecione</option><option>Não</option><option>Sim</option></select>
-          </div>
-          <div class="field"><label>Faz uso de medicação controlada? *</label>
-            <select name="medicacao_controlada" required><option value="">Selecione</option><option>Não</option><option>Sim</option></select>
-          </div>
-          <div class="field full"><label>Liste as medicações de uso contínuo e os horários <span class="opt">(ex: Losartana — 8h e 20h)</span></label><textarea name="medicacao_continua_detalhe" placeholder="Nome da medicação — horário(s) de uso"></textarea></div>
-          <div class="field full"><label>Liste as medicações controladas e os horários</label><textarea name="medicacao_controlada_detalhe" placeholder="Nome da medicação — horário(s) de uso"></textarea></div>
-          <div class="field full"><label>Necessita de algum acompanhamento especial durante o evento? <span class="opt">(opcional)</span></label><textarea name="acompanhamento_especial"></textarea></div>
-        </div>
-      </div>
-
-      <!-- ===== SEÇÃO 4 — SERVIÇO ===== -->
-      <div class="form-section">
-        <div class="form-section-head"><span class="num">04</span><h3>Sobre o seu serviço no TC</h3></div>
-        <p class="hint">Nos ajude a conhecer melhor você e como podemos direcioná-lo dentro da equipe.</p>
-        <div class="field-grid">
-          <div class="field full">
-            <label>É a primeira vez que você servirá no TC? *</label>
-            <select name="primeira_vez" required><option value="">Selecione</option><option>Sim, é minha primeira vez</option><option>Não, já servi em outras edições</option></select>
-          </div>
-          <div class="field full">
-            <label>Se é a primeira vez — qual é a sua expectativa para servir no TC? <span class="opt">(opcional)</span></label>
-            <textarea name="expectativa" placeholder="Compartilhe o que está em seu coração..."></textarea>
-          </div>
-          <div class="field full">
-            <label>Se já serviu — em quantas edições do TC você já serviu? <span class="opt">(opcional)</span></label>
-            <input type="text" name="edicoes_servidas" placeholder="Ex: Servi no TC5, TC6 e TC7">
-          </div>
-          <div class="field full">
-            <label>Gostaria de fazer parte de alguma equipe em específico? <span class="opt">(opcional — a coordenação tem a palavra final)</span></label>
-            <textarea name="equipe_desejada" placeholder="Ex: Louvor, Libertação, Recepção, Cozinha, Oração, Apoio logístico, etc."></textarea>
-          </div>
-          <div class="field full">
-            <label>Como é a sua disponibilidade de horários? *</label>
-            <textarea name="disponibilidade" placeholder="Ex: Disponível em período integral / Só posso no período da manhã / Tenho restrição de horários específicos..." required></textarea>
-          </div>
-          <div class="field full">
-            <label>Podemos contar com você para a organização pré-TC e pós-TC (fora dos dias do evento)? *</label>
-            <select name="pre_pos_tc" required>
-              <option value="">Selecione</option>
-              <option>Sim, estou disponível para o pré e o pós-TC</option>
-              <option>Consigo ajudar em parte — precisaria combinar com a coordenação</option>
-              <option>Apenas durante os dias do TC</option>
-            </select>
-          </div>
-          <div class="field full">
-            <label>Tem alguma habilidade, dom ou experiência que gostaria de compartilhar com a equipe? <span class="opt">(opcional)</span></label>
-            <textarea name="habilidades" placeholder="Ex: Músico, enfermeiro, motorista, design, som, fotografia, cozinha..."></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===== SEÇÃO 5 — TERMOS ===== -->
-      <div class="form-section">
-        <div class="form-section-head"><span class="num">05</span><h3>Termos de comprometimento</h3></div>
-
-        <div class="policy-block" style="margin-bottom:30px; background:var(--onyx); border-left-color:var(--gold);">
-          <h4 style="color:var(--ivory); font-size:18px; margin-bottom:14px;">Sobre o que é servir no TC</h4>
-          <p style="color:var(--stone-dark); line-height:1.8;">O TC é guerra espiritual pesada — e precisamos de guerreiros disciplinados, comprometidos, vigilantes, obedientes e dispostos, com o entendimento claro do que é o Tratamento de Choque.</p>
-          <p style="color:var(--stone-dark); line-height:1.8; margin-top:12px;">Servir no TC não começa no dia do evento. Começa semanas antes, na oração, no jejum, na consagração e nos encontros de preparação. Deus está na frente — Ele é o Deus do extraordinário. E nós precisamos fazer o ordinário, a nossa parte, para que tudo seja segundo a vontade Dele, para Honra e Glória do Seu nome.</p>
-          <p style="color:var(--stone-dark); line-height:1.8; margin-top:12px;">Quem decide servir, decide também se preparar. E quem não cumprir as demandas de consagração e preparação sem justificativa fundamentada poderá ter sua participação negada pela coordenação do TC — não por punição, mas por responsabilidade com o que Deus nos confiou.</p>
-        </div>
-
-        <div class="consent">
-          <input type="checkbox" id="t1" name="termo_propositos" required>
-          <label for="t1"><b>Propositos de consagração.</b> Estou ciente de que, ao fazer parte da equipe do TC, me comprometo a cumprir os propósitos estabelecidos pela coordenação: jejuns, orações direcionadas, leitura bíblica diária, orações da madrugada, encontros presenciais, participação nos cultos oficiais da Igreja, participação no Grude e presença obrigatória nas convocações de oração presencial na Igreja sede. *</label>
-        </div>
-        <div class="consent">
-          <input type="checkbox" id="t2" name="termo_treinamentos" required>
-          <label for="t2"><b>Treinamentos.</b> Estou ciente de que precisarei passar pelos treinamentos realizados pelos Líderes de Equipes, Pastores Coordenadores e Pastores Presidentes, e que a não participação sem justificativa fundamentada poderá implicar na negação da minha participação para servir no TC. *</label>
-        </div>
-        <div class="consent">
-          <input type="checkbox" id="t3" name="termo_ministracao" required>
-          <label for="t3"><b>Ministração espiritual.</b> Estou ciente de que o TC inclui momentos intensivos de oração, ministração e imposição de mãos, conduzidos pela Liderança e Equipe de Libertação da Assembleia de Deus Missão Itaú de Minas, e concordo em recebê-los durante o tratamento, inclusive como membro da equipe. *</label>
-        </div>
-        <div class="consent">
-          <input type="checkbox" id="t4" name="termo_lgpd" required>
-          <label for="t4"><b>Tratamento de dados sensíveis (LGPD).</b> Autorizo o uso dos dados de saúde e medicação informados nesta ficha exclusivamente para fins de cuidado e organização do TC, com acesso restrito à equipe de Enfermeiros e Coordenação. *</label>
-        </div>
-        <div class="consent">
-          <input type="checkbox" id="t5" name="termo_imagem">
-          <label for="t5"><b>Uso de imagem.</b> Autorizo o uso de fotos e vídeos com a minha imagem, feitos durante o TC9, para divulgação do projeto se for necessário.</label>
-        </div>
-      </div>
-
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5FWF4uHpbQ3C8Q_faQfba9TSO0UQjq_NULtMpZkyfkjkgOw/viewform" target="_blank" class="btn btn-gold btn-block" style="padding:18px; justify-content:center;">Preencher Ficha de Serviço no Google Forms</a>
-      <p style="text-align:center; margin-top:14px; font-size:13.5px; color:var(--stone);">Você será redirecionado para o formulário oficial do TC9 no Google Forms. Após o envio, a coordenação entrará em contato pelo WhatsApp.</p>
-    </form>
-
-    <div id="form-success" style="display:none; text-align:center; padding:60px 20px;">
-      <div class="eyebrow" style="justify-content:center;">Ficha recebida</div>
-      <h2 style="font-size:32px;">Bem-vindo à equipe, guerreiro!</h2>
-      <p class="lede mx-auto" style="margin-top:14px;">A coordenação do TC9 entrará em contato pelo WhatsApp em breve. Enquanto isso, continue no propósito — o TC começa na oração.</p>
-      <a href="index.html" class="btn btn-line" style="margin-top:30px; display:inline-flex;">Voltar para o início</a>
+    <div class="policy-block" style="margin-bottom:40px; text-align:left;">
+      <h4>Antes de preencher</h4>
+      <p>Leia com atenção os termos de comprometimento presentes na ficha. Servir no TC é uma decisão séria — e você estará assumindo um compromisso espiritual real.</p>
+      <p style="margin-top:12px;">Após o preenchimento, entre em contato com os responsáveis pelas inscrições para confirmar sua participação e saber sobre o pagamento:</p>
+      <p style="margin-top:10px;"><a href="https://wa.me/5535984598076" style="color:var(--gold);">Ley — (35) 98459-8076</a></p>
+      <p style="margin-top:6px;"><a href="https://wa.me/5535984516705" style="color:var(--gold);">Ester — (35) 98451-6705</a></p>
     </div>
 
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5FWF4uHpbQ3C8Q_faQfba9TSO0UQjq_NULtMpZkyfkjkgOw/viewform" target="_blank" class="btn btn-gold btn-block" style="padding:20px; font-size:17px; justify-content:center;">
+      Preencher Ficha de Serviço
+    </a>
+    <p style="margin-top:16px; font-size:13.5px; color:var(--stone);">Você será direcionado para o formulário oficial do TC9 no Google Forms.</p>
+
+    <div style="margin-top:50px; padding-top:40px; border-top:1px solid var(--line);">
+      <p style="font-size:14px; color:var(--stone);">Dúvidas sobre a inscrição para servir?</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
+        <a href="https://wa.me/5535984598076" class="btn btn-line" style="font-size:13px; padding:12px 20px;">Ley</a>
+        <a href="https://wa.me/5535984516705" class="btn btn-line" style="font-size:13px; padding:12px 20px;">Ester</a>
+      </div>
+    </div>
   </div>
 </section>
 
