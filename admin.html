@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Admin — TC | Tratamento de Choque</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+body { background: var(--onyx); color: var(--ivory); }
+.admin-box { background: var(--ink); border: 1px solid var(--line-dark); padding: 40px; max-width: 680px; margin: 60px auto; }
+.admin-box h2 { font-family: var(--display); font-size: 28px; margin-bottom: 8px; }
+.admin-box .field label { color: var(--stone-dark); }
+.admin-box .field input, .admin-box .field select, .admin-box .field textarea {
+  background: var(--onyx); border-color: var(--line-dark); color: var(--ivory);
+}
+.receipt-preview { background: #fff; color: #111; padding: 40px; margin-top: 28px; border: 1px solid var(--line); }
+.receipt-preview h3 { font-family: serif; font-size: 22px; color: #111; margin-bottom: 4px; }
+.receipt-preview .logo-text { font-size: 28px; font-weight: 700; letter-spacing: -1px; color: #111; }
+.receipt-preview hr { border: none; border-top: 1px solid #ddd; margin: 16px 0; }
+.receipt-preview .row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 14px; }
+.receipt-preview .row b { color: #333; }
+.status-badge { display: inline-block; padding: 4px 12px; font-size: 12px; font-weight: 600; border-radius: 2px; }
+.status-confirmado { background: #27ae60; color: white; }
+.status-analise { background: #f39c12; color: white; }
+.sheet-link { display: flex; align-items: center; gap: 12px; background: var(--onyx); border: 1px solid var(--line-dark); padding: 16px 20px; margin-bottom: 16px; text-decoration: none; color: var(--ivory); }
+.sheet-link:hover { border-color: var(--gold); }
+.sheet-icon { font-size: 28px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-gate" style="display:flex;align-items:center;justify-content:center;min-height:100vh;">
+  <div class="admin-box" style="text-align:center;">
+    <img src="logo-tc.jpg" alt="TC" style="width:60px;height:60px;object-fit:cover;border-radius:4px;margin-bottom:20px;">
+    <h2>Painel Admin — TC</h2>
+    <p style="color:var(--stone-dark);margin-bottom:28px;">Acesso restrito à coordenação.</p>
+    <div class="field" style="text-align:left;margin-bottom:20px;">
+      <label>Senha de acesso</label>
+      <input type="password" id="senha" placeholder="Digite a senha">
+    </div>
+    <p id="senha-erro" style="color:#e74c3c;font-size:13px;display:none;margin-bottom:12px;">Senha incorreta.</p>
+    <button onclick="login()" class="btn btn-gold btn-block" style="padding:16px;">Entrar</button>
+  </div>
+</div>
+
+<!-- PAINEL PRINCIPAL -->
+<div id="painel" style="display:none;padding:40px 20px;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <img src="logo-tc.jpg" alt="TC" style="width:44px;height:44px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:12px;">
+        <span style="font-family:var(--display);font-size:22px;">Painel Admin — TC</span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="index.html" class="btn btn-line" style="padding:10px 18px;font-size:13px;">← Site</a>
+        <button onclick="logout()" class="btn btn-line" style="padding:10px 18px;font-size:13px;">Sair</button>
+      </div>
+    </div>
+
+    <!-- PLANILHAS -->
+    <div class="eyebrow" style="margin-bottom:16px;">Planilhas de inscrições</div>
+    <a href="https://docs.google.com/spreadsheets/d/1kgaQO_Ehx1iBQn7zGG7Zp_ECkHeCPnu9wOFIANd5bO0/edit" target="_blank" class="sheet-link">
+      <span class="sheet-icon">📊</span>
+      <div><b>TC9 — Inscrições Encontristas</b><br><span style="font-size:13px;color:var(--stone-dark);">Clique para abrir no Google Sheets</span></div>
+    </a>
+    <a href="https://docs.google.com/spreadsheets/d/1nebGHqg_fOYjZAhwLN5Kt0ipovRCpSgY4r-V4PDIJM8" target="_blank" class="sheet-link" style="margin-bottom:40px;">
+      <span class="sheet-icon">📊</span>
+      <div><b>TC9 — Inscrições Servidores</b><br><span style="font-size:13px;color:var(--stone-dark);">Clique para abrir no Google Sheets</span></div>
+    </a>
+
+    <!-- GERADOR DE RECIBO -->
+    <div class="eyebrow" style="margin-bottom:16px;">Gerar comprovante de inscrição (PDF)</div>
+    <div class="admin-box" style="margin:0 0 32px;">
+      <div class="field-grid">
+        <div class="field full"><label>Nome completo do participante *</label><input type="text" id="r-nome" required></div>
+        <div class="field"><label>CPF *</label><input type="text" id="r-cpf"></div>
+        <div class="field"><label>Telefone *</label><input type="text" id="r-tel"></div>
+        <div class="field"><label>Igreja / Cidade</label><input type="text" id="r-cidade"></div>
+        <div class="field full">
+          <label>Plano contratado *</label>
+          <select id="r-plano">
+            <option>Individual — R$ 250,00</option>
+            <option>Individual Premium + Camiseta TC — R$ 300,00</option>
+            <option>Combo Família (2 pessoas) — R$ 450,00</option>
+            <option>Combo Família Premium + 2 Camisetas — R$ 530,00</option>
+            <option>Individual IDE — R$ 200,00</option>
+            <option>Individual IDE Premium + Camiseta — R$ 250,00</option>
+            <option>Combo Família IDE (2 pessoas) — R$ 350,00</option>
+            <option>Combo Família IDE Premium + 2 Camisetas — R$ 430,00</option>
+          </select>
+        </div>
+        <div class="field"><label>Forma de pagamento</label>
+          <select id="r-pagamento"><option>PIX</option><option>Cartão de Crédito</option></select>
+        </div>
+        <div class="field"><label>Data do pagamento *</label><input type="date" id="r-data"></div>
+        <div class="field full"><label>Número do comprovante / Protocolo</label><input type="text" id="r-protocolo" placeholder="Ex: TC10-0042"></div>
+        <div class="field full">
+          <label>Status</label>
+          <select id="r-status"><option value="confirmado">✅ Pagamento Confirmado</option><option value="analise">⏳ Em análise</option></select>
+        </div>
+      </div>
+      <button onclick="gerarRecibo()" class="btn btn-gold btn-block" style="padding:16px;margin-top:20px;">Gerar Comprovante PDF</button>
+    </div>
+
+    <!-- PREVIEW -->
+    <div id="receipt-container" style="display:none;">
+      <div class="eyebrow" style="margin-bottom:16px;">Preview do comprovante</div>
+      <div class="receipt-preview" id="receipt-content">
+        <!-- preenchido via JS -->
+      </div>
+      <button onclick="downloadPDF()" class="btn btn-gold" style="padding:14px 28px;margin-top:20px;">⬇ Baixar PDF</button>
+      <p style="font-size:13px;color:var(--stone-dark);margin-top:12px;">Após baixar, envie pelo WhatsApp para o participante.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SENHA = "TC2026@adm";
+
+function login() {
+  if (document.getElementById('senha').value === SENHA) {
+    document.getElementById('login-gate').style.display = 'none';
+    document.getElementById('painel').style.display = 'block';
+    // Setar data de hoje
+    document.getElementById('r-data').value = new Date().toISOString().split('T')[0];
+    // Gerar protocolo automático
+    document.getElementById('r-protocolo').value = 'TC-' + Date.now().toString().slice(-6);
+  } else {
+    document.getElementById('senha-erro').style.display = 'block';
+  }
+}
+
+function logout() {
+  document.getElementById('login-gate').style.display = 'flex';
+  document.getElementById('painel').style.display = 'none';
+  document.getElementById('senha').value = '';
+}
+
+document.getElementById('senha').addEventListener('keydown', function(e){ if(e.key==='Enter') login(); });
+
+function gerarRecibo() {
+  const nome = document.getElementById('r-nome').value;
+  if (!nome) { alert('Informe o nome do participante.'); return; }
+
+  const cpf = document.getElementById('r-cpf').value;
+  const tel = document.getElementById('r-tel').value;
+  const cidade = document.getElementById('r-cidade').value;
+  const plano = document.getElementById('r-plano').value;
+  const pagamento = document.getElementById('r-pagamento').value;
+  const data = document.getElementById('r-data').value;
+  const protocolo = document.getElementById('r-protocolo').value;
+  const status = document.getElementById('r-status').value;
+
+  const dataFmt = data ? new Date(data + 'T12:00:00').toLocaleDateString('pt-BR') : 'Não informada';
+  const statusBadge = status === 'confirmado'
+    ? '<span class="status-badge status-confirmado">✅ PAGAMENTO CONFIRMADO</span>'
+    : '<span class="status-badge status-analise">⏳ EM ANÁLISE</span>';
+
+  document.getElementById('receipt-content').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
+      <div>
+        <div class="logo-text">TC</div>
+        <div style="font-size:13px;color:#555;">Tratamento de Choque</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:11px;color:#888;font-family:monospace;">COMPROVANTE OFICIAL</div>
+        <div style="font-size:13px;font-family:monospace;color:#333;">${protocolo}</div>
+      </div>
+    </div>
+    <hr>
+    <h3>Comprovante de Inscrição</h3>
+    <div style="font-size:13px;color:#555;margin-bottom:16px;">Assembleia de Deus Missão Itaú de Minas</div>
+    <div class="row"><span>Nome completo</span><b>${nome}</b></div>
+    <div class="row"><span>CPF</span><b>${cpf || '—'}</b></div>
+    <div class="row"><span>Telefone</span><b>${tel || '—'}</b></div>
+    <div class="row"><span>Igreja / Cidade</span><b>${cidade || '—'}</b></div>
+    <hr>
+    <div class="row"><span>Plano</span><b>${plano}</b></div>
+    <div class="row"><span>Forma de pagamento</span><b>${pagamento}</b></div>
+    <div class="row"><span>Data do pagamento</span><b>${dataFmt}</b></div>
+    <hr>
+    <div style="text-align:center;margin:20px 0 10px;">${statusBadge}</div>
+    <hr>
+    <div style="font-size:11px;color:#888;text-align:center;margin-top:16px;">
+      TC — Tratamento de Choque · ADM Itaú de Minas<br>
+      Av. Madre Paulina, 58 — Bairro Maria Parreira · Itaú de Minas/MG<br>
+      @tratamentodechoque.ofc · Protocolo: ${protocolo}
+    </div>
+  `;
+  document.getElementById('receipt-container').style.display = 'block';
+  document.getElementById('receipt-container').scrollIntoView({behavior:'smooth'});
+}
+
+function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'mm', format:'a4' });
+
+  const nome = document.getElementById('r-nome').value;
+  const cpf = document.getElementById('r-cpf').value;
+  const tel = document.getElementById('r-tel').value;
+  const cidade = document.getElementById('r-cidade').value;
+  const plano = document.getElementById('r-plano').value;
+  const pagamento = document.getElementById('r-pagamento').value;
+  const data = document.getElementById('r-data').value;
+  const protocolo = document.getElementById('r-protocolo').value;
+  const status = document.getElementById('r-status').value;
+  const dataFmt = data ? new Date(data+'T12:00:00').toLocaleDateString('pt-BR') : '—';
+
+  // Fundo preto no topo
+  doc.setFillColor(21,20,15);
+  doc.rect(0,0,210,40,'F');
+
+  // Logo TC
+  doc.setTextColor(166,135,61);
+  doc.setFontSize(36);
+  doc.setFont('helvetica','bold');
+  doc.text('TC',15,28);
+
+  doc.setTextColor(200,190,170);
+  doc.setFontSize(11);
+  doc.setFont('helvetica','normal');
+  doc.text('Tratamento de Choque',38,22);
+  doc.setFontSize(9);
+  doc.text('Assembleia de Deus Missão Itaú de Minas',38,29);
+
+  doc.setTextColor(120,110,90);
+  doc.setFontSize(8);
+  doc.text('COMPROVANTE OFICIAL',150,20,'left');
+  doc.setTextColor(166,135,61);
+  doc.setFontSize(9);
+  doc.text(protocolo,150,27,'left');
+
+  // Título
+  doc.setTextColor(21,20,15);
+  doc.setFontSize(18);
+  doc.setFont('helvetica','bold');
+  doc.text('Comprovante de Inscrição',15,55);
+
+  // Linha
+  doc.setDrawColor(220,211,188);
+  doc.line(15,60,195,60);
+
+  // Dados
+  let y = 70;
+  const rows = [
+    ['Nome completo', nome],
+    ['CPF', cpf||'—'],
+    ['Telefone', tel||'—'],
+    ['Igreja / Cidade', cidade||'—'],
+    ['', ''],
+    ['Plano', plano],
+    ['Forma de pagamento', pagamento],
+    ['Data do pagamento', dataFmt],
+  ];
+
+  doc.setFont('helvetica','normal');
+  rows.forEach(([label, value]) => {
+    if (!label && !value) { doc.line(15,y,195,y); y+=8; return; }
+    doc.setFontSize(9); doc.setTextColor(120,110,90); doc.text(label,15,y);
+    doc.setFontSize(10); doc.setTextColor(21,20,15); doc.setFont('helvetica','bold');
+    doc.text(value,100,y);
+    doc.setFont('helvetica','normal');
+    y += 9;
+  });
+
+  doc.line(15,y,195,y); y+=12;
+
+  // Status
+  if (status === 'confirmado') {
+    doc.setFillColor(39,174,96);
+    doc.rect(60,y,90,12,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(11);
+    doc.setFont('helvetica','bold');
+    doc.text('✓ PAGAMENTO CONFIRMADO',105,y+8,'center');
+  } else {
+    doc.setFillColor(243,156,18);
+    doc.rect(60,y,90,12,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(11);
+    doc.setFont('helvetica','bold');
+    doc.text('EM ANÁLISE',105,y+8,'center');
+  }
+  y += 24;
+
+  // Rodapé
+  doc.setDrawColor(220,211,188);
+  doc.line(15,y,195,y);
+  y += 8;
+  doc.setTextColor(120,110,90);
+  doc.setFontSize(8);
+  doc.setFont('helvetica','normal');
+  doc.text('TC — Tratamento de Choque · ADM Itaú de Minas', 105, y, 'center');
+  y += 5;
+  doc.text('Av. Madre Paulina, 58 — Bairro Maria Parreira · Itaú de Minas/MG', 105, y, 'center');
+  y += 5;
+  doc.text('@tratamentodechoque.ofc · Protocolo: ' + protocolo, 105, y, 'center');
+
+  doc.save(`Comprovante-TC-${nome.split(' ')[0]}-${protocolo}.pdf`);
+}
+</script>
+</body>
+</html>
