@@ -6,30 +6,30 @@
 <title>Inscrição — TC | Tratamento de Choque</title>
 <link rel="stylesheet" href="styles.css">
 <style>
+.price-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:24px 0; }
+@media(max-width:600px){ .price-grid{grid-template-columns:1fr;} }
+.price-card { border:2px solid var(--line); padding:22px; background:var(--paper); }
+.price-card.destaque { border-color:var(--gold); background:var(--ivory); position:relative; }
+.price-card h4 { font-family:var(--display); font-size:18px; margin-bottom:6px; }
+.price-card .preco { font-family:var(--mono); font-size:24px; color:var(--gold); margin:6px 0 4px; }
+.price-card .desc { font-size:13px; color:var(--stone); }
+.price-card .badge { position:absolute; top:-12px; left:18px; background:var(--gold); color:var(--onyx); font-size:11px; padding:3px 10px; font-family:var(--mono); }
 .step { display:none; }
 .step.active { display:block; }
-.progress-bar { display:flex; gap:8px; margin-bottom:40px; }
+.progress-bar { display:flex; gap:8px; margin-bottom:36px; }
 .progress-step { flex:1; height:3px; background:var(--line); border-radius:2px; transition:.4s; }
 .progress-step.done { background:var(--gold); }
-.plan-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-@media(max-width:600px){ .plan-grid{grid-template-columns:1fr;} }
-.plan-card { border:2px solid var(--line); padding:22px; cursor:pointer; transition:.2s; background:var(--paper); }
-.plan-card:hover { border-color:var(--gold); }
-.plan-card.selected { border-color:var(--gold); background:var(--ivory); }
-.plan-card h4 { font-family:var(--display); font-size:20px; margin-bottom:6px; }
-.plan-card .plan-price { font-family:var(--mono); font-size:22px; color:var(--gold); margin:8px 0; }
-.plan-card .plan-desc { font-size:13.5px; color:var(--stone); }
-.plan-card .badge { display:inline-block; background:var(--gold); color:var(--onyx); font-size:11px; padding:3px 8px; font-family:var(--mono); margin-bottom:8px; }
 .pay-method { display:flex; gap:16px; flex-wrap:wrap; }
-.pay-btn { flex:1; min-width:140px; padding:20px; border:2px solid var(--line); background:var(--paper); cursor:pointer; text-align:center; transition:.2s; }
-.pay-btn:hover { border-color:var(--gold); }
-.pay-btn.selected { border-color:var(--gold); background:var(--ivory); }
-.pay-btn .pay-icon { font-size:32px; display:block; margin-bottom:8px; }
-.pay-btn .pay-label { font-family:var(--display); font-size:18px; }
-.pix-box { background:var(--onyx); color:var(--ivory); padding:28px; text-align:center; border:1px solid var(--line-dark); }
-.pix-key { font-family:var(--mono); font-size:16px; color:var(--gold-soft); padding:14px; background:rgba(255,255,255,0.05); margin:14px 0; word-break:break-all; }
-.success-icon { font-size:64px; margin-bottom:20px; }
-.coupon-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(166,135,61,0.15); border:1px solid var(--gold); color:var(--gold); padding:8px 16px; font-family:var(--mono); font-size:13px; margin-bottom:24px; }
+.pay-btn { flex:1; min-width:130px; padding:18px; border:2px solid var(--line); background:var(--paper); cursor:pointer; text-align:center; transition:.2s; }
+.pay-btn:hover,.pay-btn.selected { border-color:var(--gold); background:var(--ivory); }
+.pix-box { background:var(--onyx); color:var(--ivory); padding:24px; text-align:center; }
+.pix-key { font-family:var(--mono); font-size:15px; color:var(--gold-soft); padding:12px; background:rgba(255,255,255,0.06); margin:12px 0; word-break:break-all; }
+.plan-card { border:2px solid var(--line); padding:20px; cursor:pointer; transition:.2s; background:var(--paper); margin-bottom:10px; }
+.plan-card:hover,.plan-card.selected { border-color:var(--gold); background:var(--ivory); }
+.plan-card h4 { font-family:var(--display); font-size:18px; }
+.plan-card .plan-price { font-family:var(--mono); font-size:20px; color:var(--gold); margin:4px 0; }
+.plan-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:20px; }
+@media(max-width:560px){ .plan-grid{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -50,7 +50,6 @@
       <a href="contribua.html">Contribua</a>
       <a href="servir.html">Quero Servir</a>
     </div>
-    <a href="inscricao.html" class="btn btn-gold" style="padding:11px 22px;font-size:13px;white-space:nowrap;">Inscreva-se</a>
     <button id="navtoggle" aria-label="Menu" style="background:none;border:none;cursor:pointer;padding:8px;display:none;flex-direction:column;gap:5px;">
       <span style="display:block;width:24px;height:2px;background:var(--ivory);"></span>
       <span style="display:block;width:24px;height:2px;background:var(--ivory);"></span>
@@ -67,33 +66,83 @@
   <a href="loja.html" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Loja</a>
   <a href="contribua.html" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Contribua</a>
   <a href="servir.html" style="color:var(--gold-soft);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;font-weight:600;">⚔️ Quero Servir</a>
-  <a href="inscricao.html" class="btn btn-gold" style="margin-top:28px;justify-content:center;font-size:16px;padding:16px;">Inscreva-se</a>
 </div>
 
-<header class="hero" style="padding:70px 0 50px;">
-  <div class="wrap" style="max-width:720px;">
-    <p class="tag-pill">INSCRIÇÃO OFICIAL</p>
-    <h1 style="margin-top:18px;font-size:clamp(32px,5vw,50px);">Garanta sua vaga<br>no <em>Tratamento de Choque.</em></h1>
-    <p class="lede" style="margin-top:16px;">Siga os passos abaixo para concluir sua inscrição com segurança.</p>
-  </div>
-</header>
+<!-- PASSO 1: O QUE É + VALORES + PRÉ-INSCRIÇÃO -->
+<div id="step1" class="step active">
 
-<section class="section section--paper">
-  <div class="wrap" style="max-width:720px;">
-
-    <!-- BARRA DE PROGRESSO -->
-    <div class="progress-bar" id="progress">
-      <div class="progress-step done" id="ps1"></div>
-      <div class="progress-step" id="ps2"></div>
-      <div class="progress-step" id="ps3"></div>
-      <div class="progress-step" id="ps4"></div>
+  <header class="hero" style="padding:70px 0 50px;">
+    <div class="wrap">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+        <img src="logo-tc.jpg" alt="TC" style="height:64px;width:64px;object-fit:cover;border-radius:6px;">
+        <p class="tag-pill" style="margin:0;">TC — TRATAMENTO DE CHOQUE</p>
+      </div>
+      <h1 style="font-size:clamp(32px,5vw,52px);">Garanta sua vaga<br>no <em>Tratamento de Choque.</em></h1>
+      <p class="lede" style="margin-top:14px;">Três dias separados para tratar, na presença de Deus, aquilo que só Ele alcança.</p>
     </div>
+  </header>
 
-    <!-- ═══ PASSO 1 — PRÉ-INSCRIÇÃO ═══ -->
-    <div class="step active" id="step1">
-      <div class="eyebrow">Passo 1 de 4</div>
-      <h2 style="font-size:28px;margin-bottom:8px;">Pré-inscrição</h2>
-      <p style="color:var(--stone);margin-bottom:32px;">Preencha seus dados básicos. Após confirmar, você receberá o link para a ficha completa e para o pagamento.</p>
+  <!-- O QUE É O TC -->
+  <section class="section--tight section--dark">
+    <div class="wrap" style="max-width:780px;">
+      <div class="eyebrow">O que é o TC</div>
+      <h2 style="font-size:26px;margin-top:10px;">Um Tratamento de Verdade!</h2>
+      <p class="lede" style="margin-top:14px;">O TC é um processo de transformação espiritual promovido pela Assembleia de Deus Missão Itaú de Minas. Durante três dias, cada participante é conduzido por um caminho de Palavra, oração e ministração, permitindo que Deus trate profundamente áreas da vida que precisam de cura, libertação e restauração.</p>
+      <div style="display:flex;gap:28px;margin-top:28px;flex-wrap:wrap;">
+        <div><span style="font-family:var(--mono);font-size:22px;color:var(--gold-soft);">Sexta</span><p style="font-size:13px;color:var(--stone-dark);margin-top:4px;">Check-in na Igreja sede</p></div>
+        <div><span style="font-family:var(--mono);font-size:22px;color:var(--gold-soft);">Sábado</span><p style="font-size:13px;color:var(--stone-dark);margin-top:4px;">Dia inteiro no Retiro Canaã</p></div>
+        <div><span style="font-family:var(--mono);font-size:22px;color:var(--gold-soft);">Domingo</span><p style="font-size:13px;color:var(--stone-dark);margin-top:4px;">Culto de encerramento</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALORES -->
+  <section class="section--tight section--ivory">
+    <div class="wrap" style="max-width:780px;">
+      <div class="eyebrow" style="margin-bottom:16px;">Valores das inscrições — TC11</div>
+
+      <p style="font-weight:600;margin-bottom:12px;font-size:15px;">Individuais</p>
+      <div class="price-grid">
+        <div class="price-card">
+          <h4>Individual</h4>
+          <div class="preco">R$ 250,00</div>
+          <div class="desc">Hospedagem, alimentação e material de apoio (3 dias)</div>
+        </div>
+        <div class="price-card destaque">
+          <span class="badge">⭐ PREMIUM</span>
+          <h4>Individual + Camiseta TC</h4>
+          <div class="preco">R$ 300,00</div>
+          <div class="desc">Tudo do Individual + Camiseta Oficial do TC</div>
+        </div>
+      </div>
+
+      <p style="font-weight:600;margin-bottom:12px;font-size:15px;margin-top:8px;">Combo Família — 2 pessoas</p>
+      <div class="price-grid">
+        <div class="price-card">
+          <h4>Combo Família</h4>
+          <div class="preco">R$ 450,00</div>
+          <div class="desc">2 inscrições em um único pagamento</div>
+        </div>
+        <div class="price-card destaque">
+          <span class="badge">⭐ PREMIUM</span>
+          <h4>Combo Família + 2 Camisetas</h4>
+          <div class="preco">R$ 530,00</div>
+          <div class="desc">2 inscrições + 2 Camisetas Oficiais do TC</div>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-top:8px;">
+        <b>Cupom IDE:</b> Desconto especial disponível no momento da pré-inscrição para quem possui o cupom.
+      </div>
+    </div>
+  </section>
+
+  <!-- PRÉ-INSCRIÇÃO -->
+  <section class="section section--paper">
+    <div class="wrap" style="max-width:680px;">
+      <div class="eyebrow" style="margin-bottom:8px;">Pré-inscrição</div>
+      <h2 style="font-size:26px;margin-bottom:8px;">Faça sua pré-inscrição</h2>
+      <p style="color:var(--stone);margin-bottom:28px;">Preencha seus dados básicos. Ao confirmar, você será direcionado para a ficha completa e para o pagamento. A coordenação também será avisada pelo WhatsApp.</p>
 
       <form id="form-pre">
         <div class="field-grid">
@@ -103,170 +152,134 @@
           <div class="field"><label>Igreja / Congregação</label><input type="text" id="pre-igreja"></div>
           <div class="field"><label>Cidade *</label><input type="text" id="pre-cidade" required></div>
           <div class="field full">
-            <label>Cupom IDE <span class="opt">(opcional — se você tem um cupom de desconto)</span></label>
-            <input type="text" id="pre-cupom" placeholder="Ex: TC-10-IDE" style="text-transform:uppercase;">
+            <label>Cupom IDE <span class="opt">(opcional)</span></label>
+            <input type="text" id="pre-cupom" placeholder="Ex: TC-IDE" style="text-transform:uppercase;">
           </div>
         </div>
-        <p id="cupom-erro" style="color:#c0392b;font-size:13px;display:none;margin-top:-16px;margin-bottom:16px;">Cupom inválido. Verifique e tente novamente.</p>
-        <button type="submit" class="btn btn-gold btn-block" style="padding:18px;margin-top:24px;">Confirmar pré-inscrição →</button>
+        <p id="cupom-erro" style="color:#c0392b;font-size:13px;display:none;margin-bottom:16px;">Cupom inválido. Verifique e tente novamente.</p>
+        <button type="submit" class="btn btn-gold btn-block" style="padding:18px;margin-top:16px;">Confirmar pré-inscrição →</button>
       </form>
     </div>
+  </section>
 
-    <!-- ═══ PASSO 2 — FICHA COMPLETA ═══ -->
-    <div class="step" id="step2">
-      <div class="eyebrow">Passo 2 de 4</div>
-      <h2 style="font-size:28px;margin-bottom:8px;">Ficha completa</h2>
-      <div id="cupom-ativo-badge" style="display:none;" class="coupon-badge">🎟️ Cupom IDE ativo — desconto aplicado</div>
-      <p style="color:var(--stone);margin-bottom:32px;">Preencha a ficha completa com seus dados de saúde e os termos de aceite. Isso é essencial para que a equipe do TC cuide de você com segurança.</p>
-      <a id="btn-forms" href="https://docs.google.com/forms/d/1nebGHqg_fOYjZAhwLN5Kt0ipovRCpSgY4r-V4PDIJM8/viewform" target="_blank" class="btn btn-gold btn-block" style="padding:18px;justify-content:center;margin-bottom:20px;">Preencher Ficha Completa no Google Forms</a>
-      <p style="font-size:13.5px;color:var(--stone);text-align:center;margin-bottom:32px;">Clique no botão acima, preencha o formulário e volte aqui.</p>
-      <hr style="border:none;border-top:1px solid var(--line);margin-bottom:28px;">
+</div><!-- fim step1 -->
+
+<!-- PASSO 2: FICHA COMPLETA -->
+<div id="step2" class="step">
+  <header class="hero" style="padding:60px 0 40px;">
+    <div class="wrap" style="max-width:680px;">
+      <div class="progress-bar"><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step"></div><div class="progress-step"></div></div>
+      <p class="tag-pill">PASSO 2 DE 4</p>
+      <h1 style="font-size:clamp(28px,4vw,44px);margin-top:14px;">Ficha <em>completa</em></h1>
+      <p class="lede" style="margin-top:12px;">Preencha a ficha com seus dados de saúde e os termos de aceite.</p>
+    </div>
+  </header>
+  <section class="section section--paper">
+    <div class="wrap" style="max-width:680px;">
+      <div id="badge-cupom" style="display:none;background:rgba(166,135,61,.12);border:1px solid var(--gold);color:var(--gold);padding:10px 16px;font-family:var(--mono);font-size:13px;margin-bottom:24px;">🎟️ Cupom IDE ativo — desconto aplicado</div>
+      <a href="https://docs.google.com/forms/d/1nebGHqg_fOYjZAhwLN5Kt0ipovRCpSgY4r-V4PDIJM8/viewform" target="_blank" class="btn btn-gold btn-block" style="padding:18px;justify-content:center;margin-bottom:14px;">Preencher Ficha Completa no Google Forms</a>
+      <p style="font-size:13px;color:var(--stone);text-align:center;margin-bottom:28px;">Preencha o formulário e volte aqui.</p>
+      <hr style="border:none;border-top:1px solid var(--line);margin-bottom:24px;">
       <p style="font-weight:600;margin-bottom:12px;">Já preencheu a ficha?</p>
       <button onclick="goTo(3)" class="btn btn-gold btn-block" style="padding:16px;">Continuar para o pagamento →</button>
     </div>
+  </section>
+</div>
 
-    <!-- ═══ PASSO 3 — PAGAMENTO ═══ -->
-    <div class="step" id="step3">
-      <div class="eyebrow">Passo 3 de 4</div>
-      <h2 style="font-size:28px;margin-bottom:8px;">Escolha seu plano</h2>
-      <div id="cupom-ativo-badge2" style="display:none;" class="coupon-badge">🎟️ Cupom IDE ativo — preços especiais desbloqueados</div>
-      <p style="color:var(--stone);margin-bottom:28px;">Selecione o plano que deseja e escolha a forma de pagamento.</p>
+<!-- PASSO 3: PAGAMENTO -->
+<div id="step3" class="step">
+  <header class="hero" style="padding:60px 0 40px;">
+    <div class="wrap" style="max-width:680px;">
+      <div class="progress-bar"><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step done"></div><div class="progress-step"></div></div>
+      <p class="tag-pill">PASSO 3 DE 4</p>
+      <h1 style="font-size:clamp(28px,4vw,44px);margin-top:14px;">Escolha seu <em>plano</em></h1>
+    </div>
+  </header>
+  <section class="section section--paper">
+    <div class="wrap" style="max-width:680px;">
+      <div id="badge-cupom2" style="display:none;background:rgba(166,135,61,.12);border:1px solid var(--gold);color:var(--gold);padding:10px 16px;font-family:var(--mono);font-size:13px;margin-bottom:24px;">🎟️ Cupom IDE ativo — preços especiais desbloqueados</div>
 
-      <!-- PLANOS SEM CUPOM -->
       <div id="planos-normais">
-        <p class="eyebrow" style="margin-bottom:16px;">Planos individuais</p>
-        <div class="plan-grid" style="margin-bottom:24px;">
-          <div class="plan-card" onclick="selectPlan(this,'Individual','250','ind_normal')">
-            <h4>Individual</h4>
-            <div class="plan-price">R$ 250,00</div>
-            <div class="plan-desc">Hospedagem, alimentação e material de apoio.</div>
-          </div>
-          <div class="plan-card" onclick="selectPlan(this,'Individual Premium + Camiseta TC','300','ind_premium')">
-            <span class="badge">⭐ PREMIUM</span>
-            <h4>Individual Premium</h4>
-            <div class="plan-price">R$ 300,00</div>
-            <div class="plan-desc">Tudo do Individual + Camiseta Oficial do TC.</div>
-          </div>
-        </div>
-        <p class="eyebrow" style="margin-bottom:16px;">Combo família — 2 pessoas</p>
+        <p class="eyebrow" style="margin-bottom:12px;">Individuais</p>
         <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família (2 pessoas)','450','combo_normal')">
-            <h4>Combo Família</h4>
-            <div class="plan-price">R$ 450,00</div>
-            <div class="plan-desc">2 inscrições em um único pagamento.</div>
-          </div>
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família Premium + 2 Camisetas TC','530','combo_premium')">
-            <span class="badge">⭐ PREMIUM</span>
-            <h4>Combo Família Premium</h4>
-            <div class="plan-price">R$ 530,00</div>
-            <div class="plan-desc">2 inscrições + 2 Camisetas Oficiais do TC.</div>
-          </div>
+          <div class="plan-card" onclick="selectPlan(this,'Individual','250','ind_normal')"><h4>Individual</h4><div class="plan-price">R$ 250,00</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Individual Premium + Camiseta TC','300','ind_premium')"><h4>Individual Premium</h4><div class="plan-price">R$ 300,00</div><div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div></div>
+        </div>
+        <p class="eyebrow" style="margin-bottom:12px;">Combo Família</p>
+        <div class="plan-grid">
+          <div class="plan-card" onclick="selectPlan(this,'Combo Família (2 pessoas)','450','combo_normal')"><h4>Combo Família</h4><div class="plan-price">R$ 450,00</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Combo Família Premium + 2 Camisetas TC','530','combo_premium')"><h4>Combo Família Premium</h4><div class="plan-price">R$ 530,00</div><div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div></div>
         </div>
       </div>
 
-      <!-- PLANOS COM CUPOM IDE -->
       <div id="planos-ide" style="display:none;">
-        <p class="eyebrow" style="margin-bottom:16px;">Planos individuais — Cupom IDE</p>
-        <div class="plan-grid" style="margin-bottom:24px;">
-          <div class="plan-card" onclick="selectPlan(this,'Individual com Cupom IDE','200','ind_ide')">
-            <span class="badge">🎟️ CUPOM IDE</span>
-            <h4>Individual IDE</h4>
-            <div class="plan-price">R$ 200,00</div>
-            <div class="plan-desc">Hospedagem, alimentação e material de apoio.</div>
-          </div>
-          <div class="plan-card" onclick="selectPlan(this,'Individual Premium + Camiseta TC com Cupom IDE','250','ind_ide_premium')">
-            <span class="badge">⭐ PREMIUM • 🎟️ IDE</span>
-            <h4>Individual IDE Premium</h4>
-            <div class="plan-price">R$ 250,00</div>
-            <div class="plan-desc">Tudo do Individual + Camiseta Oficial do TC.</div>
-          </div>
-        </div>
-        <p class="eyebrow" style="margin-bottom:16px;">Combo família — 2 pessoas — Cupom IDE</p>
+        <p class="eyebrow" style="margin-bottom:12px;">Individuais — Cupom IDE</p>
         <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família com Cupom IDE (2 pessoas)','350','combo_ide')">
-            <span class="badge">🎟️ CUPOM IDE</span>
-            <h4>Combo Família IDE</h4>
-            <div class="plan-price">R$ 350,00</div>
-            <div class="plan-desc">2 inscrições em um único pagamento.</div>
-          </div>
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família Premium + 2 Camisetas TC com Cupom IDE','430','combo_ide_premium')">
-            <span class="badge">⭐ PREMIUM • 🎟️ IDE</span>
-            <h4>Combo Família IDE Premium</h4>
-            <div class="plan-price">R$ 430,00</div>
-            <div class="plan-desc">2 inscrições + 2 Camisetas Oficiais do TC.</div>
-          </div>
+          <div class="plan-card" onclick="selectPlan(this,'Individual com Cupom IDE','200','ind_ide')"><h4>Individual IDE</h4><div class="plan-price">R$ 200,00</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Individual IDE Premium + Camiseta TC','250','ind_ide_premium')"><h4>Individual IDE Premium</h4><div class="plan-price">R$ 250,00</div><div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div></div>
+        </div>
+        <p class="eyebrow" style="margin-bottom:12px;">Combo Família — Cupom IDE</p>
+        <div class="plan-grid">
+          <div class="plan-card" onclick="selectPlan(this,'Combo Família com Cupom IDE (2 pessoas)','350','combo_ide')"><h4>Combo Família IDE</h4><div class="plan-price">R$ 350,00</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Combo Família IDE Premium + 2 Camisetas','430','combo_ide_premium')"><h4>Combo Família IDE Premium</h4><div class="plan-price">R$ 430,00</div><div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div></div>
         </div>
       </div>
 
-      <!-- SEGUNDO PARTICIPANTE (combo) -->
-      <div id="segundo-participante" style="display:none;margin-top:28px;">
-        <div class="policy-block">
-          <h4>Segundo participante do Combo</h4>
-          <p style="margin-bottom:14px;">Informe os dados da segunda pessoa incluída neste combo:</p>
-          <div class="field-grid">
-            <div class="field full"><label>Nome completo *</label><input type="text" id="p2-nome" placeholder="Nome da segunda pessoa"></div>
+      <div id="segundo-p" style="display:none;margin-top:20px;">
+        <div class="policy-block"><h4>Segundo participante do Combo</h4>
+          <div class="field-grid" style="margin-top:12px;">
+            <div class="field full"><label>Nome *</label><input type="text" id="p2-nome"></div>
             <div class="field"><label>Telefone *</label><input type="tel" id="p2-tel"></div>
             <div class="field"><label>CPF *</label><input type="text" id="p2-cpf"></div>
           </div>
         </div>
       </div>
 
-      <!-- MÉTODO DE PAGAMENTO -->
-      <div id="metodo-pagamento" style="display:none;margin-top:32px;">
-        <p style="font-weight:600;margin-bottom:16px;">Como deseja pagar?</p>
+      <div id="metodo-pag" style="display:none;margin-top:24px;">
+        <p style="font-weight:600;margin-bottom:14px;">Forma de pagamento:</p>
         <div class="pay-method">
-          <div class="pay-btn" onclick="selectPayMethod('pix',this)">
-            <span class="pay-icon">📱</span>
-            <div class="pay-label">PIX</div>
-            <div style="font-size:12px;color:var(--stone);margin-top:4px;">Aprovação imediata</div>
-          </div>
-          <div class="pay-btn" onclick="selectPayMethod('card',this)">
-            <span class="pay-icon">💳</span>
-            <div class="pay-label">Cartão de crédito</div>
-            <div style="font-size:12px;color:var(--stone);margin-top:4px;">Link seguro</div>
-          </div>
+          <div class="pay-btn" onclick="selectPay('pix',this)"><span style="font-size:28px;display:block;margin-bottom:6px;">📱</span><b>PIX</b></div>
+          <div class="pay-btn" onclick="selectPay('card',this)"><span style="font-size:28px;display:block;margin-bottom:6px;">💳</span><b>Cartão</b></div>
         </div>
       </div>
 
-      <!-- PIX -->
-      <div id="pix-section" style="display:none;margin-top:28px;">
+      <div id="pix-sec" style="display:none;margin-top:20px;">
         <div class="pix-box">
-          <p style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--stone-dark);text-transform:uppercase;margin-bottom:8px;">Chave PIX</p>
-          <div class="pix-key" id="pix-chave">tc.tratamentodechoque@gmail.com</div>
-          <p style="font-size:13.5px;color:var(--stone-dark);margin-bottom:4px;">Titular: Assembleia de Deus Missão Itaú de Minas</p>
-          <p style="font-size:13.5px;color:var(--stone-dark);margin-bottom:4px;">Banco: Mercado Pago</p>
-          <p style="margin-top:16px;font-size:15px;">Valor a pagar: <strong id="pix-valor" style="color:var(--gold-soft);font-size:20px;"></strong></p>
+          <p style="font-size:11px;font-family:var(--mono);letter-spacing:.1em;color:var(--stone-dark);">CHAVE PIX</p>
+          <div class="pix-key">tc.tratamentodechoque@gmail.com</div>
+          <p style="font-size:13px;color:var(--stone-dark);">Titular: Assembleia de Deus Missão Itaú de Minas — Mercado Pago</p>
+          <p style="margin-top:14px;font-size:16px;">Valor: <strong id="pix-val" style="color:var(--gold-soft);font-size:22px;"></strong></p>
         </div>
-        <p style="font-size:13.5px;color:var(--stone);margin:16px 0 20px;">Após efetuar o PIX, envie o comprovante pelo WhatsApp para confirmar sua inscrição:</p>
-        <a id="btn-comprov-pix" href="#" target="_blank" class="btn btn-gold btn-block" style="padding:16px;justify-content:center;">📲 Enviar comprovante pelo WhatsApp</a>
-        <button onclick="goTo(4)" class="btn btn-line btn-block" style="padding:14px;margin-top:12px;">Já enviei o comprovante →</button>
+        <p style="font-size:13.5px;color:var(--stone);margin:14px 0 16px;">Após o PIX, envie o comprovante pelo WhatsApp:</p>
+        <a id="btn-comp-pix" href="#" target="_blank" class="btn btn-gold btn-block" style="padding:14px;justify-content:center;">📲 Enviar comprovante pelo WhatsApp</a>
+        <button onclick="goTo(4)" class="btn btn-line btn-block" style="padding:12px;margin-top:10px;">Já enviei →</button>
       </div>
 
-      <!-- CARTÃO -->
-      <div id="card-section" style="display:none;margin-top:28px;">
-        <p style="color:var(--stone);margin-bottom:16px;">Clique para ser redirecionado para o pagamento seguro:</p>
-        <a id="btn-card-link" href="#" target="_blank" class="btn btn-gold btn-block" style="padding:16px;justify-content:center;margin-bottom:16px;">💳 Pagar com Cartão de Crédito</a>
-        <p style="font-size:13.5px;color:var(--stone);margin-bottom:16px;">Após o pagamento, envie o comprovante pelo WhatsApp:</p>
-        <a id="btn-comprov-card" href="#" target="_blank" class="btn btn-line btn-block" style="padding:14px;justify-content:center;">📲 Enviar comprovante pelo WhatsApp</a>
-        <button onclick="goTo(4)" class="btn btn-line btn-block" style="padding:12px;margin-top:12px;">Já enviei o comprovante →</button>
+      <div id="card-sec" style="display:none;margin-top:20px;">
+        <a id="btn-card" href="#" target="_blank" class="btn btn-gold btn-block" style="padding:14px;justify-content:center;margin-bottom:14px;">💳 Pagar com Cartão de Crédito</a>
+        <p style="font-size:13.5px;color:var(--stone);margin-bottom:12px;">Após o pagamento, envie o comprovante:</p>
+        <a id="btn-comp-card" href="#" target="_blank" class="btn btn-line btn-block" style="padding:12px;justify-content:center;">📲 Enviar comprovante pelo WhatsApp</a>
+        <button onclick="goTo(4)" class="btn btn-line btn-block" style="padding:12px;margin-top:10px;">Já enviei →</button>
       </div>
     </div>
+  </section>
+</div>
 
-    <!-- ═══ PASSO 4 — CONFIRMAÇÃO ═══ -->
-    <div class="step" id="step4" style="text-align:center;padding:40px 0;">
-      <div class="success-icon">🙏</div>
+<!-- PASSO 4: CONFIRMAÇÃO -->
+<div id="step4" class="step">
+  <section class="section section--paper" style="text-align:center;">
+    <div class="wrap" style="max-width:580px;">
+      <div style="font-size:64px;margin-bottom:16px;">🙏</div>
       <div class="eyebrow" style="justify-content:center;">Inscrição em análise</div>
       <h2 style="font-size:28px;margin-top:12px;">Falta pouco!</h2>
-      <p class="lede" style="margin:16px auto;">Sua inscrição foi recebida e está em análise. Assim que confirmarmos o pagamento, enviaremos seu comprovante oficial pelo WhatsApp.</p>
-      <div class="policy-block" style="max-width:480px;margin:28px auto;text-align:left;">
-        <h4>Próximos passos</h4>
-        <p>✅ Pré-inscrição confirmada<br>✅ Ficha completa enviada<br>✅ Comprovante de pagamento enviado<br>⏳ Aguardando confirmação da coordenação</p>
+      <p class="lede" style="margin:14px auto;">Sua inscrição foi recebida. Assim que confirmarmos o pagamento, enviaremos seu comprovante oficial pelo WhatsApp.</p>
+      <div class="policy-block" style="max-width:440px;margin:24px auto;text-align:left;">
+        <p>✅ Pré-inscrição confirmada<br>✅ Ficha completa enviada<br>✅ Comprovante enviado<br>⏳ Aguardando confirmação</p>
       </div>
-      <a href="index.html" class="btn btn-line" style="display:inline-flex;margin-top:8px;">Voltar para o início</a>
+      <a href="index.html" class="btn btn-line" style="display:inline-flex;">← Voltar para o início</a>
     </div>
-
-  </div>
-</section>
+  </section>
+</div>
 
 <footer>
   <div class="wrap">
@@ -280,142 +293,100 @@
 </footer>
 
 <script>
-// ── Config ───────────────────────────────────────────────
-const CUPOM_VALIDO = "TC-10-IDE";
-const WA_COORD = "5535997457405"; // Ana Beatriz
-const PIX_CHAVE = "tc.tratamentodechoque@gmail.com";
-
-const CARD_LINKS = {
-  ind_normal:       "https://link.infinitepay.io/matheus-gileade/VC1D-qbntBxZFFb-250,00",
-  ind_premium:      "https://link.infinitepay.io/matheus-gileade/VC1D-QrifkU9Wkk-300,00",
-  combo_normal:     "https://link.infinitepay.io/matheus-gileade/VC1D-WSeSIrCRHG-450,00",
-  combo_premium:    "https://link.infinitepay.io/matheus-gileade/VC1D-QY1KmnN4jf-530,00",
-  ind_ide:          "https://link.infinitepay.io/matheus-gileade/VC1D-X6Ser7O3b9-200,00",
-  ind_ide_premium:  "https://link.infinitepay.io/matheus-gileade/VC1D-qbntBxZFFb-250,00",
-  combo_ide:        "https://link.infinitepay.io/matheus-gileade/VC1D-aeVxZrcZYo-350,00",
+const CUPOM = "TC-IDE";
+const WA = "5535997457405";
+const CARDS = {
+  ind_normal:"https://link.infinitepay.io/matheus-gileade/VC1D-qbntBxZFFb-250,00",
+  ind_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-QrifkU9Wkk-300,00",
+  combo_normal:"https://link.infinitepay.io/matheus-gileade/VC1D-WSeSIrCRHG-450,00",
+  combo_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-QY1KmnN4jf-530,00",
+  ind_ide:"https://link.infinitepay.io/matheus-gileade/VC1D-X6Ser7O3b9-200,00",
+  ind_ide_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-qbntBxZFFb-250,00",
+  combo_ide:"https://link.infinitepay.io/matheus-gileade/VC1D-aeVxZrcZYo-350,00",
   combo_ide_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-8miEuO4xmQ-430,00"
 };
+let st = {nome:'',tel:'',cpf:'',igor:'',cid:'',cupomOk:false,plano:'',planoKey:'',val:''};
 
-// ── Estado ───────────────────────────────────────────────
-let state = { nome:'', tel:'', cpf:'', igreja:'', cidade:'', cupomValido:false, plano:'', planoKey:'', valor:'', payMethod:'' };
-
-// ── Navegação entre passos ───────────────────────────────
-function goTo(n) {
-  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-  document.getElementById('step'+n).classList.add('active');
-  document.querySelectorAll('.progress-step').forEach((p,i) => {
-    p.classList.toggle('done', i < n);
+function goTo(n){
+  [1,2,3,4].forEach(i=>{
+    var el=document.getElementById('step'+i);
+    if(el) el.classList.toggle('active',i===n);
   });
-  window.scrollTo({top:0, behavior:'smooth'});
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── Passo 1 — Pré-inscrição ──────────────────────────────
-document.getElementById('form-pre').addEventListener('submit', function(e) {
+document.getElementById('form-pre').addEventListener('submit',function(e){
   e.preventDefault();
-  const cupom = document.getElementById('pre-cupom').value.trim().toUpperCase();
-  const cupomErr = document.getElementById('cupom-erro');
-  
-  if (cupom && cupom !== CUPOM_VALIDO) {
-    cupomErr.style.display = 'block';
-    return;
-  }
-  cupomErr.style.display = 'none';
-  
-  state.nome = document.getElementById('pre-nome').value;
-  state.tel = document.getElementById('pre-tel').value;
-  state.cpf = document.getElementById('pre-cpf').value;
-  state.igreja = document.getElementById('pre-igreja').value || 'Não informada';
-  state.cidade = document.getElementById('pre-cidade').value;
-  state.cupomValido = cupom === CUPOM_VALIDO;
+  var cupom = document.getElementById('pre-cupom').value.trim().toUpperCase();
+  var err = document.getElementById('cupom-erro');
+  if(cupom && cupom !== CUPOM){ err.style.display='block'; return; }
+  err.style.display='none';
+  st.nome=document.getElementById('pre-nome').value;
+  st.tel=document.getElementById('pre-tel').value;
+  st.cpf=document.getElementById('pre-cpf').value;
+  st.igor=document.getElementById('pre-igreja').value||'Não informada';
+  st.cid=document.getElementById('pre-cidade').value;
+  st.cupomOk=cupom===CUPOM;
 
-  // Enviar WhatsApp para coordenação
-  const msg = encodeURIComponent(
-    `🔔 *NOVA PRÉ-INSCRIÇÃO TC*\n\n` +
-    `👤 Nome: ${state.nome}\n` +
-    `📱 Telefone: ${state.tel}\n` +
-    `🪪 CPF: ${state.cpf}\n` +
-    `⛪ Igreja: ${state.igreja}\n` +
-    `📍 Cidade: ${state.cidade}\n` +
-    `🎟️ Cupom: ${state.cupomValido ? CUPOM_VALIDO + ' ✅' : 'Sem cupom'}`
+  var msg=encodeURIComponent(
+    '🔔 *PRÉ-INSCRIÇÃO TC*\n\n'+
+    '👤 Nome: '+st.nome+'\n📱 Telefone: '+st.tel+'\n🪪 CPF: '+st.cpf+
+    '\n⛪ Igreja: '+st.igor+'\n📍 Cidade: '+st.cid+
+    '\n🎟️ Cupom: '+(st.cupomOk?CUPOM+' ✅':'Sem cupom')
   );
-  window.open(`https://wa.me/${WA_COORD}?text=${msg}`, '_blank');
+  window.open('https://wa.me/'+WA+'?text='+msg,'_blank');
 
-  // Mostrar cupom ativo na tela seguinte
-  const badges = document.querySelectorAll('#cupom-ativo-badge, #cupom-ativo-badge2');
-  badges.forEach(b => b.style.display = state.cupomValido ? 'inline-flex' : 'none');
-
-  // Mostrar planos corretos
-  document.getElementById('planos-normais').style.display = state.cupomValido ? 'none' : 'block';
-  document.getElementById('planos-ide').style.display = state.cupomValido ? 'block' : 'none';
-
+  document.querySelectorAll('#badge-cupom,#badge-cupom2').forEach(function(b){
+    b.style.display=st.cupomOk?'block':'none';
+  });
+  document.getElementById('planos-normais').style.display=st.cupomOk?'none':'block';
+  document.getElementById('planos-ide').style.display=st.cupomOk?'block':'none';
   goTo(2);
 });
 
-// ── Passo 3 — Seleção de plano ───────────────────────────
-let selectedPlanEl = null;
-function selectPlan(el, nome, valor, key) {
-  if (selectedPlanEl) selectedPlanEl.classList.remove('selected');
-  el.classList.add('selected');
-  selectedPlanEl = el;
-  state.plano = nome;
-  state.planoKey = key;
-  state.valor = valor;
-
-  // Mostrar campo segundo participante se combo
-  const isCombo = key.startsWith('combo');
-  document.getElementById('segundo-participante').style.display = isCombo ? 'block' : 'none';
-  document.getElementById('metodo-pagamento').style.display = 'block';
-
-  // Resetar método de pagamento
-  document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('selected'));
-  document.getElementById('pix-section').style.display = 'none';
-  document.getElementById('card-section').style.display = 'none';
-  state.payMethod = '';
+var selEl=null;
+function selectPlan(el,nome,val,key){
+  if(selEl) selEl.classList.remove('selected');
+  el.classList.add('selected'); selEl=el;
+  st.plano=nome; st.planoKey=key; st.val=val;
+  var isCombo=key.startsWith('combo');
+  document.getElementById('segundo-p').style.display=isCombo?'block':'none';
+  document.getElementById('metodo-pag').style.display='block';
+  document.querySelectorAll('.pay-btn').forEach(function(b){b.classList.remove('selected');});
+  document.getElementById('pix-sec').style.display='none';
+  document.getElementById('card-sec').style.display='none';
 }
 
-// ── Passo 3 — Método de pagamento ───────────────────────
-function selectPayMethod(method, el) {
-  document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('selected'));
+function selectPay(m,el){
+  document.querySelectorAll('.pay-btn').forEach(function(b){b.classList.remove('selected');});
   el.classList.add('selected');
-  state.payMethod = method;
-
-  const p2nome = document.getElementById('p2-nome') ? document.getElementById('p2-nome').value : '';
-  const p2tel = document.getElementById('p2-tel') ? document.getElementById('p2-tel').value : '';
-  const p2cpf = document.getElementById('p2-cpf') ? document.getElementById('p2-cpf').value : '';
-
-  const isCombo = state.planoKey.startsWith('combo');
-
-  // Mensagem comprovante WhatsApp
-  let msgComp = `✅ *COMPROVANTE DE PAGAMENTO — TC*\n\n` +
-    `👤 ${state.nome}\n📱 ${state.tel}\n🪪 CPF: ${state.cpf}\n` +
-    `📦 Plano: ${state.plano}\n💰 Valor: R$ ${state.valor},00\n` +
-    `💳 Forma: ${method === 'pix' ? 'PIX' : 'Cartão de Crédito'}`;
-  if (isCombo && p2nome) msgComp += `\n\n👤 2º participante: ${p2nome}\n📱 ${p2tel}\n🪪 CPF: ${p2cpf}`;
-  const waMsg = encodeURIComponent(msgComp + '\n\n📎 Comprovante em anexo.');
-  const waLink = `https://wa.me/${WA_COORD}?text=${waMsg}`;
-
-  if (method === 'pix') {
-    document.getElementById('pix-valor').textContent = `R$ ${state.valor},00`;
-    document.getElementById('btn-comprov-pix').href = waLink;
-    document.getElementById('pix-section').style.display = 'block';
-    document.getElementById('card-section').style.display = 'none';
+  var p2n=document.getElementById('p2-nome')?document.getElementById('p2-nome').value:'';
+  var p2t=document.getElementById('p2-tel')?document.getElementById('p2-tel').value:'';
+  var isCombo=st.planoKey.startsWith('combo');
+  var msgC='✅ *COMPROVANTE TC*\n\n👤 '+st.nome+'\n📱 '+st.tel+'\n🪪 '+st.cpf+
+    '\n📦 Plano: '+st.plano+'\n💰 R$ '+st.val+',00\n💳 '+(m==='pix'?'PIX':'Cartão');
+  if(isCombo&&p2n) msgC+='\n\n👤 2º: '+p2n+' — '+p2t;
+  msgC+='\n\n📎 Comprovante em anexo.';
+  var waLink='https://wa.me/'+WA+'?text='+encodeURIComponent(msgC);
+  if(m==='pix'){
+    document.getElementById('pix-val').textContent='R$ '+st.val+',00';
+    document.getElementById('btn-comp-pix').href=waLink;
+    document.getElementById('pix-sec').style.display='block';
+    document.getElementById('card-sec').style.display='none';
   } else {
-    document.getElementById('btn-card-link').href = CARD_LINKS[state.planoKey] || '#';
-    document.getElementById('btn-comprov-card').href = waLink;
-    document.getElementById('card-section').style.display = 'block';
-    document.getElementById('pix-section').style.display = 'none';
+    document.getElementById('btn-card').href=CARDS[st.planoKey]||'#';
+    document.getElementById('btn-comp-card').href=waLink;
+    document.getElementById('card-sec').style.display='block';
+    document.getElementById('pix-sec').style.display='none';
   }
 }
 
-// ── Mobile menu ──────────────────────────────────────────
 (function(){
-  var toggle = document.getElementById('navtoggle');
-  var menu = document.getElementById('mobile-menu');
-  var open = false;
-  function upd(){ toggle.style.display = window.innerWidth<=880?'flex':'none'; if(window.innerWidth>880){menu.style.display='none';open=false;} }
-  toggle.addEventListener('click',function(){ open=!open; menu.style.display=open?'flex':'none'; document.body.style.overflow=open?'hidden':''; });
-  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ open=false; menu.style.display='none'; document.body.style.overflow=''; }); });
-  window.addEventListener('resize',upd); upd();
+  var t=document.getElementById('navtoggle'),m=document.getElementById('mobile-menu'),o=false;
+  function u(){t.style.display=window.innerWidth<=880?'flex':'none';if(window.innerWidth>880){m.style.display='none';o=false;}}
+  t.addEventListener('click',function(){o=!o;m.style.display=o?'flex':'none';document.body.style.overflow=o?'hidden':'';});
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){o=false;m.style.display='none';document.body.style.overflow='';});});
+  window.addEventListener('resize',u);u();
 })();
 </script>
 </body>
