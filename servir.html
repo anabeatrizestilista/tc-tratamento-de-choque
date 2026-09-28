@@ -74,7 +74,7 @@
   <div class="wrap" style="max-width:780px;">
     <div class="policy-block">
       <h4 style="color:var(--ivory);">Você está se inscrevendo para <em style="color:var(--gold-soft);">servir no TC</em></h4>
-      <p style="margin-top:10px; line-height:1.8;">Para a sua convocação é necessário cumprir os propósitos, as agendas do pré-TC, e o pagamento com data final 30/11 — jejuns, orações direcionadas, leitura bíblica diária, orações da madrugada, encontros presenciais, participação no Grude e presença obrigatória nas convocações de oração presencial na Igreja sede.</p>
+      <p style="margin-top:10px; line-height:1.8;">Para a sua convocação é necessário cumprir os propósitos e agendas do pré-TC — jejuns, orações direcionadas, leitura bíblica diária, orações da madrugada, encontros presenciais, participação nos cultos oficiais da Igreja, participação no Grude e presença obrigatória nas convocações de oração presencial na Igreja sede.</p>
       <p style="margin-top:12px; line-height:1.8;">Quem não cumprir essas demandas sem justificativa fundamentada poderá ter sua participação negada pela coordenação do TC.</p>
     </div>
   </div>
@@ -146,7 +146,11 @@
             </select>
           </div>
         </div>
-        <button type="submit" class="btn btn-gold btn-block" style="padding:18px;margin-top:20px;">Confirmar pré-inscrição →</button>
+        <div class="consent" style="margin-top:20px;">
+          <input type="checkbox" id="s-aceite" required>
+          <label for="s-aceite"><b>Estou ciente e concordo com as regras para servir no TC</b> — incluindo o cumprimento dos propósitos e agendas do pré-TC. *</label>
+        </div>
+        <button type="submit" class="btn btn-gold btn-block" style="padding:18px;margin-top:16px;">Confirmar pré-inscrição →</button>
       </form>
     </div>
 
@@ -216,7 +220,7 @@
 </footer>
 
 <script>
-const WA_BIA = "5535991124957";
+const WA_BIA = "5535997457405";
 const WA_LEY = "5535984598076";
 const WA_ESTER = "5535984516705";
 let sNome = '', sTel = '', sCpf = '', sIgreja = '', sCidade = '', sPrimeira = '';
@@ -244,8 +248,7 @@ document.getElementById('form-pre-servir').addEventListener('submit', function(e
     `📱 Telefone: ${sTel}\n` +
     `⛪ Igreja: ${sIgreja}\n` +
     `📍 Cidade: ${sCidade}\n` +
-    `🏠 Alojamento: ${sAlojamento}` +
-    `Li e concordo com os termos e regras para servir no TC ✅\n`+
+    `🏠 Alojamento: ${sAlojamento}`
   );
   window.open(`https://wa.me/${WA_BIA}?text=${msg}`, '_blank');
 
