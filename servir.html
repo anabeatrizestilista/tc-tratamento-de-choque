@@ -5,13 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quero Servir no TC | Tratamento de Choque — ADM Itaú de Minas</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+.price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0; }
+@media(max-width:600px){ .price-grid{grid-template-columns:1fr;} }
+.price-card { border:2px solid var(--line); padding:22px; text-align:center; background:var(--paper); }
+.price-card.destaque { border-color:var(--gold); background:var(--ivory); }
+.price-card.vencido { border-color:#c0392b; background:#fdf5f5; }
+.price-card .preco { font-family:var(--display); font-size:32px; color:var(--gold); margin:8px 0 4px; }
+.price-card .prazo { font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--stone); text-transform:uppercase; }
+.price-card .badge-preco { display:inline-block; font-size:11px; padding:3px 10px; margin-bottom:10px; font-family:var(--mono); }
+.badge-verde { background:rgba(39,174,96,.15); color:#27ae60; border:1px solid #27ae60; }
+.badge-vermelho { background:rgba(192,57,43,.1); color:#c0392b; border:1px solid #c0392b; }
+.step { display:none; }
+.step.active { display:block; }
+.progress-bar { display:flex; gap:8px; margin-bottom:36px; }
+.progress-step { flex:1; height:3px; background:var(--line); border-radius:2px; transition:.4s; }
+.progress-step.done { background:var(--gold); }
+</style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="wrap">
     <a class="brand" href="index.html">
-      <img src="logo-tc.jpg" alt="TC — Tratamento de Choque" style="height:46px;width:46px;object-fit:cover;border-radius:4px;flex:none;">
+      <img src="logo-tc.jpg" alt="TC" style="height:46px;width:46px;object-fit:cover;border-radius:4px;flex:none;">
       <span><small>ADM Itaú de Minas</small></span>
     </a>
     <div class="navlinks">
@@ -22,155 +39,237 @@
       <a href="index.html#inscricoes">Inscrições</a>
       <a href="loja.html">Loja</a>
       <a href="contribua.html">Contribua</a>
+      <a href="servir.html" class="current">Quero Servir</a>
     </div>
-    <a href="inscricao.html" class="btn btn-gold" style="padding:11px 22px; font-size:13px; white-space:nowrap;">Inscreva-se</a>
-    <button class="navtoggle" id="navtoggle" aria-label="Menu" style="background:none;border:none;cursor:pointer;padding:8px;display:none;flex-direction:column;gap:5px;">
-      <span style="display:block;width:24px;height:2px;background:var(--ivory);transition:.3s;"></span>
-      <span style="display:block;width:24px;height:2px;background:var(--ivory);transition:.3s;"></span>
-      <span style="display:block;width:24px;height:2px;background:var(--ivory);transition:.3s;"></span>
+    <a href="inscricao.html" class="btn btn-gold" style="padding:11px 22px;font-size:13px;white-space:nowrap;">Inscreva-se</a>
+    <button id="navtoggle" aria-label="Menu" style="background:none;border:none;cursor:pointer;padding:8px;display:none;flex-direction:column;gap:5px;">
+      <span style="display:block;width:24px;height:2px;background:var(--ivory);"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--ivory);"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--ivory);"></span>
     </button>
   </div>
 </nav>
 
-<!-- MOBILE MENU OVERLAY -->
-<div id="mobile-menu" style="display:none; position:fixed; top:76px; left:0; right:0; bottom:0; background:rgba(21,20,15,0.97); z-index:49; padding:32px 28px; flex-direction:column; gap:0; overflow-y:auto;">
+<div id="mobile-menu" style="display:none;position:fixed;top:76px;left:0;right:0;bottom:0;background:rgba(21,20,15,0.97);z-index:49;padding:32px 28px;flex-direction:column;overflow-y:auto;">
   <a href="index.html#sobre" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">O que é</a>
   <a href="index.html#programacao" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Programação</a>
-  <a href="index.html#testemunhos" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Testemunhos</a>
   <a href="galeria.html" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Galeria</a>
   <a href="index.html#inscricoes" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Inscrições</a>
   <a href="loja.html" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Loja</a>
   <a href="contribua.html" style="color:var(--ivory);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;">Contribua</a>
   <a href="servir.html" style="color:var(--gold-soft);font-size:18px;padding:18px 0;border-bottom:1px solid rgba(244,239,226,0.1);display:block;font-weight:600;">⚔️ Quero Servir</a>
-  <a href="inscricao.html" class="btn btn-gold" style="margin-top:28px;justify-content:center;font-size:16px;padding:16px;">Inscreva-se no TC9</a>
+  <a href="inscricao.html" class="btn btn-gold" style="margin-top:28px;justify-content:center;font-size:16px;padding:16px;">Inscreva-se</a>
 </div>
 
-<script>
-(function(){
-  var toggle = document.getElementById('navtoggle');
-  var menu = document.getElementById('mobile-menu');
-  var open = false;
-  function updateToggle(){
-    if(window.innerWidth <= 880){
-      toggle.style.display = 'flex';
-    } else {
-      toggle.style.display = 'none';
-      menu.style.display = 'none';
-      open = false;
-    }
-  }
-  toggle.addEventListener('click', function(){
-    open = !open;
-    menu.style.display = open ? 'flex' : 'none';
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
-  menu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      open = false;
-      menu.style.display = 'none';
-      document.body.style.overflow = '';
-    });
-  });
-  window.addEventListener('resize', updateToggle);
-  updateToggle();
-})();
-</script>
-
-<header class="hero" style="padding:70px 0 60px;">
+<header class="hero" style="padding:70px 0 50px;">
   <div class="wrap">
-    <p class="tag-pill">FICHA DE SERVIÇO — TC9</p>
-    <h1 style="margin-top:22px; font-size:clamp(34px,5vw,52px);">Quero <em>Servir</em><br>no Tratamento de Choque.</h1>
-    <p class="lede" style="margin-top:18px;">Servir no TC não é voluntariado comum. É guerra espiritual. Antes de preencher esta ficha, leia com atenção os termos de comprometimento — eles dizem com clareza o que esperamos de cada guerreiro desta equipe.</p>
+    <p class="tag-pill">EQUIPE DE SERVIÇO — TC</p>
+    <h1 style="margin-top:18px;font-size:clamp(32px,5vw,52px);">Sente o chamado<br>para <em>Servir?</em></h1>
+    <p class="lede" style="margin-top:16px;">Servir no TC não é voluntariado comum. É guerra espiritual. Você está se inscrevendo para fazer parte da equipe que sustenta o Tratamento de Choque.</p>
   </div>
 </header>
 
-<!-- BLOCO DE VALOR -->
+<!-- AVISO IMPORTANTE -->
 <section class="section--tight section--dark">
-  <div class="wrap">
-    <div class="cols">
-      <div>
-        <div class="eyebrow">Inscrição para servir</div>
-        <h2 style="font-size:28px;">Valor e forma de pagamento</h2>
-        <p class="lede" style="margin-top:14px;">Preencha a ficha abaixo e confirme sua inscrição com os responsáveis desse Departamento do TC. Eles os orientarão sobre o valor e a forma de pagamento.</p>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:16px;">
-        <div class="policy-block">
-          <h4 style="color:var(--ivory);">Ley</h4>
-          <p style="margin-top:6px;">(35) 98459-8076</p>
-          <a href="https://wa.me/5535984598076?text=Ol%C3%A1%20Ley!%20Vi%20o%20site%20do%20TC%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20inscri%C3%A7%C3%A3o%20para%20servir%20no%20TC9." target="_blank" class="btn-ghost" style="display:inline-flex; margin-top:12px;">Falar com a Ley pelo WhatsApp</a>
-        </div>
-        <div class="policy-block">
-          <h4 style="color:var(--ivory);">Ester</h4>
-          <p style="margin-top:6px;">(35) 98451-6705</p>
-          <a href="https://wa.me/5535984516705?text=Ol%C3%A1%20Ester!%20Vi%20o%20site%20do%20TC%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20inscri%C3%A7%C3%A3o%20para%20servir%20no%20TC9." target="_blank" class="btn-ghost" style="display:inline-flex; margin-top:12px;">Falar com a Ester pelo WhatsApp</a>
-        </div>
-      </div>
+  <div class="wrap" style="max-width:780px;">
+    <div class="policy-block">
+      <h4 style="color:var(--ivory);">Você está se inscrevendo para <em style="color:var(--gold-soft);">servir no TC</em></h4>
+      <p style="margin-top:10px; line-height:1.8;">Para a sua convocação é necessário cumprir os propósitos e agendas do pré-TC — jejuns, orações direcionadas, leitura bíblica diária, orações da madrugada, encontros presenciais, participação nos cultos oficiais da Igreja, participação no Grude e presença obrigatória nas convocações de oração presencial na Igreja sede.</p>
+      <p style="margin-top:12px; line-height:1.8;">Quem não cumprir essas demandas sem justificativa fundamentada poderá ter sua participação negada pela coordenação do TC.</p>
     </div>
   </div>
 </section>
 
-<!-- FICHA -->
-<section class="section section--paper">
-  <div class="wrap" style="max-width:680px; text-align:center;">
-
-    <div class="policy-block" style="margin-bottom:40px; text-align:left;">
-      <h4>Antes de preencher</h4>
-      <p>Leia com atenção os termos de comprometimento presentes na ficha. Servir no TC é uma decisão séria — e você estará assumindo um compromisso espiritual real.</p>
-      <p style="margin-top:12px;">Após o preenchimento, entre em contato com os responsáveis pelas inscrições para confirmar sua participação e saber sobre o pagamento:</p>
-      <p style="margin-top:10px;"><a href="https://wa.me/5535984598076" style="color:var(--gold);">Ley — (35) 98459-8076</a></p>
-      <p style="margin-top:6px;"><a href="https://wa.me/5535984516705" style="color:var(--gold);">Ester — (35) 98451-6705</a></p>
-    </div>
-
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5FWF4uHpbQ3C8Q_faQfba9TSO0UQjq_NULtMpZkyfkjkgOw/viewform" target="_blank" class="btn btn-gold btn-block" style="padding:20px; font-size:17px; justify-content:center;">
-      Preencher Ficha de Serviço
-    </a>
-    <p style="margin-top:16px; font-size:13.5px; color:var(--stone);">Você será direcionado para o formulário oficial do TC9 no Google Forms.</p>
-
-    <div style="margin-top:50px; padding-top:40px; border-top:1px solid var(--line);">
-      <p style="font-size:14px; color:var(--stone);">Dúvidas sobre a inscrição para servir?</p>
-      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
-        <a href="https://wa.me/5535984598076" class="btn btn-line" style="font-size:13px; padding:12px 20px;">Ley</a>
-        <a href="https://wa.me/5535984516705" class="btn btn-line" style="font-size:13px; padding:12px 20px;">Ester</a>
+<!-- VALORES -->
+<section class="section--tight section--ivory">
+  <div class="wrap" style="max-width:780px;">
+    <div class="eyebrow" style="margin-bottom:16px;">Valor da inscrição para servir</div>
+    <div class="price-grid">
+      <div class="price-card destaque">
+        <span class="badge-preco badge-verde">🏷️ Desconto antecipado</span>
+        <div class="prazo">Até 31/10/2026</div>
+        <div class="preco">R$ 100</div>
+        <div style="font-size:13px;color:var(--stone);">R$125 com desconto de R$25</div>
+      </div>
+      <div class="price-card">
+        <span class="badge-preco" style="background:rgba(166,135,61,.1);color:var(--gold);border:1px solid var(--gold);">💛 Valor normal</span>
+        <div class="prazo">01/11 a 25/11/2026</div>
+        <div class="preco">R$ 125</div>
+        <div style="font-size:13px;color:var(--stone);">Vencimento em 25/11/2026</div>
+      </div>
+      <div class="price-card">
+        <span class="badge-preco badge-vermelho">⚠️ Após vencimento</span>
+        <div class="prazo">Após 25/11/2026</div>
+        <div class="preco">R$ 150</div>
+        <div style="font-size:13px;color:var(--stone);">R$125 + R$25 de adicional</div>
       </div>
     </div>
+
+    <div class="policy-block" style="margin-top:0;">
+      <h4>Formas de pagamento</h4>
+      <p style="margin-top:8px;"><b>PIX:</b> <span style="font-family:var(--mono);color:var(--gold);">tc.tratamentodechoque@gmail.com</span></p>
+      <p style="margin-top:4px;font-size:13px;color:var(--stone);">Titular: Assembleia de Deus Missão Itaú de Minas — Mercado Pago</p>
+      <p style="margin-top:12px;">Após o pagamento, envie o comprovante pelo WhatsApp para os responsáveis pelas inscrições:</p>
+      <p style="margin-top:8px;"><a href="https://wa.me/5535984598076" style="color:var(--gold);">Ley — (35) 98459-8076</a> &nbsp;|&nbsp; <a href="https://wa.me/5535984516705" style="color:var(--gold);">Ester — (35) 98451-6705</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- PRÉ-INSCRIÇÃO + FICHA -->
+<section class="section section--paper">
+  <div class="wrap" style="max-width:680px;">
+
+    <div class="progress-bar" id="progress">
+      <div class="progress-step done" id="ps1"></div>
+      <div class="progress-step" id="ps2"></div>
+      <div class="progress-step" id="ps3"></div>
+    </div>
+
+    <!-- PASSO 1 — PRÉ-INSCRIÇÃO -->
+    <div class="step active" id="step1">
+      <div class="eyebrow">Passo 1 de 3</div>
+      <h2 style="font-size:26px;margin-bottom:8px;">Pré-inscrição para servir</h2>
+      <p style="color:var(--stone);margin-bottom:28px;">Preencha seus dados básicos. Ao confirmar, a coordenação será avisada pelo WhatsApp e você receberá orientações sobre os próximos passos.</p>
+
+      <form id="form-pre-servir">
+        <div class="field-grid">
+          <div class="field full"><label>Nome completo *</label><input type="text" id="s-nome" required></div>
+          <div class="field"><label>Telefone / WhatsApp *</label><input type="tel" id="s-tel" required></div>
+          <div class="field"><label>Cidade *</label><input type="text" id="s-cidade" required></div>
+          <div class="field"><label>Igreja que congrega *</label><input type="text" id="s-igreja" required></div>
+          <div class="field full">
+            <label>Precisa de alojamento no Retiro Canaã? *</label>
+            <select id="s-alojamento" required>
+              <option value="">Selecione</option>
+              <option>Sim, precisarei de alojamento</option>
+              <option>Não, irei e voltarei todos os dias</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gold btn-block" style="padding:18px;margin-top:20px;">Confirmar pré-inscrição →</button>
+      </form>
+    </div>
+
+    <!-- PASSO 2 — FICHA COMPLETA -->
+    <div class="step" id="step2">
+      <div class="eyebrow">Passo 2 de 3</div>
+      <h2 style="font-size:26px;margin-bottom:8px;">Ficha completa de serviço</h2>
+      <p style="color:var(--stone);margin-bottom:28px;">Preencha a ficha completa com seus dados de saúde, disponibilidade e os termos de comprometimento.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5FWF4uHpbQ3C8Q_faQfba9TSO0UQjq_NULtMpZkyfkjkgOw/viewform" target="_blank" class="btn btn-gold btn-block" style="padding:18px;justify-content:center;margin-bottom:16px;">Preencher Ficha Completa no Google Forms</a>
+      <p style="font-size:13px;color:var(--stone);text-align:center;margin-bottom:28px;">Clique acima, preencha o formulário e volte aqui.</p>
+      <hr style="border:none;border-top:1px solid var(--line);margin-bottom:24px;">
+      <p style="font-weight:600;margin-bottom:12px;">Já preencheu a ficha?</p>
+      <button onclick="goTo(3)" class="btn btn-gold btn-block" style="padding:16px;">Continuar para o pagamento →</button>
+    </div>
+
+    <!-- PASSO 3 — PAGAMENTO -->
+    <div class="step" id="step3">
+      <div class="eyebrow">Passo 3 de 3</div>
+      <h2 style="font-size:26px;margin-bottom:8px;">Pagamento</h2>
+      <p style="color:var(--stone);margin-bottom:24px;">Efetue o pagamento e envie o comprovante para a coordenação.</p>
+
+      <div class="policy-block" style="margin-bottom:24px;">
+        <h4>PIX — Inscrição para servir</h4>
+        <p style="margin-top:8px;">Chave PIX: <span style="font-family:var(--mono);color:var(--gold);">tc.tratamentodechoque@gmail.com</span></p>
+        <p style="font-size:13px;color:var(--stone);margin-top:4px;">Titular: Assembleia de Deus Missão Itaú de Minas — Mercado Pago</p>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line);">
+          <p style="font-size:13.5px;">🏷️ Até 31/10 → <b>R$ 100,00</b></p>
+          <p style="font-size:13.5px;margin-top:4px;">💛 01/11 a 25/11 → <b>R$ 125,00</b></p>
+          <p style="font-size:13.5px;margin-top:4px;">⚠️ Após 25/11 → <b>R$ 150,00</b></p>
+        </div>
+      </div>
+
+      <p style="font-size:13.5px;color:var(--stone);margin-bottom:16px;">Após o pagamento, envie o comprovante para os responsáveis pelas inscrições:</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;">
+        <a id="btn-comp-ley" href="#" target="_blank" class="btn btn-gold" style="flex:1;padding:14px;justify-content:center;text-align:center;">📲 Enviar para Ley</a>
+        <a id="btn-comp-ester" href="#" target="_blank" class="btn btn-gold" style="flex:1;padding:14px;justify-content:center;text-align:center;">📲 Enviar para Ester</a>
+      </div>
+
+      <button onclick="goTo(4)" class="btn btn-line btn-block" style="padding:14px;">Já enviei o comprovante →</button>
+    </div>
+
+    <!-- PASSO 4 — CONFIRMAÇÃO -->
+    <div class="step" id="step4" style="text-align:center;padding:40px 0;">
+      <div style="font-size:64px;margin-bottom:20px;">⚔️</div>
+      <div class="eyebrow" style="justify-content:center;">Pré-inscrição recebida</div>
+      <h2 style="font-size:28px;margin-top:12px;">Bem-vindo à equipe!</h2>
+      <p class="lede" style="margin:16px auto;">Sua pré-inscrição foi enviada e está em análise. A coordenação entrará em contato pelo WhatsApp com os próximos passos.</p>
+      <div class="policy-block" style="max-width:480px;margin:28px auto;text-align:left;">
+        <h4>Status da sua inscrição</h4>
+        <p>✅ Pré-inscrição enviada<br>✅ Ficha completa preenchida<br>✅ Comprovante de pagamento enviado<br>⏳ Aguardando confirmação da coordenação</p>
+      </div>
+      <a href="index.html" class="btn btn-line" style="display:inline-flex;margin-top:8px;">Voltar para o início</a>
+    </div>
+
   </div>
 </section>
 
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div>
-        <h5>TC · Tratamento de Choque</h5>
-        <p>Uma realização da Assembleia de Deus Missão Itaú de Minas (MG).</p>
-        <p style="margin-top:10px;">Av. Madre Paulina, 58 — Bairro Maria Parreira<br>Itaú de Minas — MG, CEP 37975-000</p>
-      </div>
-      <div>
-        <h5>Inscrições para servir</h5>
-        <p><a href="https://wa.me/5535984598076">Ley — (35) 98459-8076</a></p>
-        <p><a href="https://wa.me/5535984516705">Ester — (35) 98451-6705</a></p>
-      </div>
-      <div>
-        <h5>Contato</h5>
-        <p><a href="https://wa.me/553591124957">Pr. Matheus — (35) 9112-4957</a></p>
-        <p><a href="https://wa.me/5535997457405">Ana Beatriz — (35) 99745-7405</a></p>
-        <p><a href="https://www.instagram.com/tratamentodechoque.ofc/" target="_blank">@tratamentodechoque.ofc</a></p>
-      </div>
+      <div><h5>TC · Tratamento de Choque</h5><p>Uma realização da Assembleia de Deus Missão Itaú de Minas (MG).</p><p style="margin-top:10px;">Av. Madre Paulina, 58 — Bairro Maria Parreira<br>Itaú de Minas — MG, CEP 37975-000</p></div>
+      <div><h5>Inscrições para servir</h5><p><a href="https://wa.me/5535984598076">Ley — (35) 98459-8076</a></p><p><a href="https://wa.me/5535984516705">Ester — (35) 98451-6705</a></p></div>
+      <div><h5>Contato</h5><p><a href="https://wa.me/553591124957">Pr. Matheus — (35) 9112-4957</a></p><p><a href="https://wa.me/5535997457405">Ana Beatriz — (35) 99745-7405</a></p><p><a href="https://www.instagram.com/tratamentodechoque.ofc/" target="_blank">@tratamentodechoque.ofc</a></p></div>
     </div>
-    <div class="foot-bottom">
-      <span>© 2026 ADM Itaú de Minas — TC Tratamento de Choque</span>
-      <span>Dados tratados conforme a LGPD</span>
-    </div>
+    <div class="foot-bottom"><span>© 2026 ADM Itaú de Minas — TC</span><span>Dados tratados conforme a LGPD</span></div>
   </div>
 </footer>
 
 <script>
-document.getElementById("form-servir").addEventListener("submit", function(e){
-  e.preventDefault();
-  this.style.display = "none";
-  document.getElementById("form-success").style.display = "block";
-  window.scrollTo({top:0, behavior:"smooth"});
-});
-</script>
+const WA_BIA = "5535997457405";
+const WA_LEY = "5535984598076";
+const WA_ESTER = "5535984516705";
+let sNome = '', sTel = '', sCpf = '', sIgreja = '', sCidade = '', sPrimeira = '';
 
+function goTo(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  document.querySelectorAll('.progress-step').forEach((p,i) => p.classList.toggle('done', i < n));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.getElementById('form-pre-servir').addEventListener('submit', function(e) {
+  e.preventDefault();
+  sNome = document.getElementById('s-nome').value;
+  sTel = document.getElementById('s-tel').value;
+  sCpf = '';
+  sIgreja = document.getElementById('s-igreja').value || 'Não informada';
+  sCidade = document.getElementById('s-cidade').value;
+  sPrimeira = '';
+  const sAlojamento = document.getElementById('s-alojamento').value;
+
+  const msg = encodeURIComponent(
+    `⚔️ *PRÉ-INSCRIÇÃO PARA SERVIR — TC*\n\n` +
+    `👤 Nome: ${sNome}\n` +
+    `📱 Telefone: ${sTel}\n` +
+    `⛪ Igreja: ${sIgreja}\n` +
+    `📍 Cidade: ${sCidade}\n` +
+    `🏠 Alojamento: ${sAlojamento}`
+  );
+  window.open(`https://wa.me/${WA_BIA}?text=${msg}`, '_blank');
+
+  // Preparar botões de comprovante
+  const sAlojamentoVal = document.getElementById('s-alojamento').value;
+  const msgComp = encodeURIComponent(
+    `✅ *COMPROVANTE — INSCRIÇÃO PARA SERVIR — TC*\n\n` +
+    `👤 ${sNome}\n📱 ${sTel}\n⛪ ${sIgreja}\n📍 ${sCidade}\n🏠 ${sAlojamentoVal}\n\n📎 Comprovante em anexo.`
+  );
+  document.getElementById('btn-comp-ley').href = `https://wa.me/${WA_LEY}?text=${msgComp}`;
+  document.getElementById('btn-comp-ester').href = `https://wa.me/${WA_ESTER}?text=${msgComp}`;
+
+  goTo(2);
+});
+
+// Mobile menu
+(function(){
+  var toggle = document.getElementById('navtoggle');
+  var menu = document.getElementById('mobile-menu');
+  var open = false;
+  function upd(){ toggle.style.display = window.innerWidth<=880?'flex':'none'; if(window.innerWidth>880){menu.style.display='none';open=false;} }
+  toggle.addEventListener('click',function(){ open=!open; menu.style.display=open?'flex':'none'; document.body.style.overflow=open?'hidden':''; });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ open=false; menu.style.display='none'; document.body.style.overflow=''; }); });
+  window.addEventListener('resize',upd); upd();
+})();
+</script>
 </body>
 </html>
