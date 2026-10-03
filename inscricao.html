@@ -105,13 +105,13 @@
       <div class="price-grid">
         <div class="price-card">
           <h4>Individual</h4>
-          <div class="preco">R$ 250,00</div>
+          <div class="preco">R$ 270,00</div>
           <div class="desc">Hospedagem, alimentação e material de apoio (3 dias)</div>
         </div>
         <div class="price-card destaque">
           <span class="badge">⭐ PREMIUM</span>
           <h4>Individual + Camiseta TC</h4>
-          <div class="preco">R$ 300,00</div>
+          <div class="preco">R$ 320,00</div>
           <div class="desc">Tudo do Individual + Camiseta Oficial do TC</div>
         </div>
       </div>
@@ -120,19 +120,19 @@
       <div class="price-grid">
         <div class="price-card">
           <h4>Combo Família</h4>
-          <div class="preco">R$ 450,00</div>
+          <div class="preco">R$ 490,00</div>
           <div class="desc">2 inscrições em um único pagamento</div>
         </div>
         <div class="price-card destaque">
           <span class="badge">⭐ PREMIUM</span>
           <h4>Combo Família + 2 Camisetas</h4>
-          <div class="preco">R$ 530,00</div>
+          <div class="preco">R$ 590,00</div>
           <div class="desc">2 inscrições + 2 Camisetas Oficiais do TC</div>
         </div>
       </div>
 
       <div class="note-box" style="margin-top:8px;">
-        <b>Cupom de desconto Ide:</b> Desconto especial disponível no momento da pré-inscrição para quem possui o cupom.
+        <b>Cupom IDE:</b> Desconto especial disponível no momento da pré-inscrição para quem possui o cupom.
       </div>
     </div>
   </section>
@@ -153,7 +153,7 @@
           <div class="field"><label>Cidade *</label><input type="text" id="pre-cidade" required></div>
           <div class="field full">
             <label>Cupom IDE <span class="opt">(opcional)</span></label>
-            <input type="text" id="pre-cupom" placeholder="Ex: TC-IDE" style="text-transform:uppercase;">
+            <input type="text" id="pre-cupom" placeholder="Ex: IDETC011" style="text-transform:uppercase;">
           </div>
         </div>
         <p id="cupom-erro" style="color:#c0392b;font-size:13px;display:none;margin-bottom:16px;">Cupom inválido. Verifique e tente novamente.</p>
@@ -202,26 +202,26 @@
       <div id="planos-normais">
         <p class="eyebrow" style="margin-bottom:12px;">Individuais</p>
         <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Individual','250','ind_normal')"><h4>Individual</h4><div class="plan-price">R$ 250,00</div></div>
-          <div class="plan-card" onclick="selectPlan(this,'Individual Premium + Camiseta TC','300','ind_premium')"><h4>Individual Premium</h4><div class="plan-price">R$ 300,00</div><div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Individual','270','ind_normal')"><h4>Individual</h4><div class="plan-price">R$ 270,00</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Individual Premium + Camiseta TC','320','ind_premium')"><h4>Individual Premium</h4><div class="plan-price">R$ 320,00</div><div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div></div>
         </div>
         <p class="eyebrow" style="margin-bottom:12px;">Combo Família</p>
         <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família (2 pessoas)','450','combo_normal')"><h4>Combo Família</h4><div class="plan-price">R$ 450,00</div></div>
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família Premium + 2 Camisetas TC','530','combo_premium')"><h4>Combo Família Premium</h4><div class="plan-price">R$ 530,00</div><div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Combo Família (2 pessoas)','490','combo_normal')"><h4>Combo Família</h4><div class="plan-price">R$ 490,00</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Combo Família Premium + 2 Camisetas TC','590','combo_premium')"><h4>Combo Família Premium</h4><div class="plan-price">R$ 590,00</div><div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div></div>
         </div>
       </div>
 
       <div id="planos-ide" style="display:none;">
         <p class="eyebrow" style="margin-bottom:12px;">Individuais — Cupom IDE</p>
         <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Individual com Cupom IDE','200','ind_ide')"><h4>Individual IDE</h4><div class="plan-price">R$ 200,00</div></div>
-          <div class="plan-card" onclick="selectPlan(this,'Individual IDE Premium + Camiseta TC','250','ind_ide_premium')"><h4>Individual IDE Premium</h4><div class="plan-price">R$ 250,00</div><div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Individual com Cupom IDE','220','ind_ide')"><h4>Individual IDE</h4><div class="plan-price">R$ 220,00</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Individual IDE Premium + Camiseta TC','270','ind_ide_premium')"><h4>Individual IDE Premium</h4><div class="plan-price">R$ 270,00</div><div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div></div>
         </div>
         <p class="eyebrow" style="margin-bottom:12px;">Combo Família — Cupom IDE</p>
         <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família com Cupom IDE (2 pessoas)','350','combo_ide')"><h4>Combo Família IDE</h4><div class="plan-price">R$ 350,00</div></div>
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família IDE Premium + 2 Camisetas','430','combo_ide_premium')"><h4>Combo Família IDE Premium</h4><div class="plan-price">R$ 430,00</div><div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Combo Família com Cupom IDE (2 pessoas)','390','combo_ide')"><h4>Combo Família IDE</h4><div class="plan-price">R$ 390,00</div></div>
+          <div class="plan-card" onclick="selectPlan(this,'Combo Família IDE Premium + 2 Camisetas','490','combo_ide_premium')"><h4>Combo Família IDE Premium</h4><div class="plan-price">R$ 490,00</div><div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div></div>
         </div>
       </div>
 
@@ -293,7 +293,7 @@
 </footer>
 
 <script>
-const CUPOM = "TC-IDE";
+const CUPOM = "IDETC011";
 const WA = "5535997457405";
 const CARDS = {
   ind_normal:"https://link.infinitepay.io/matheus-gileade/VC1D-qbntBxZFFb-250,00",
