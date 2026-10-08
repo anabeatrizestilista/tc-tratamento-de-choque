@@ -105,13 +105,13 @@
       <div class="price-grid">
         <div class="price-card">
           <h4>Individual</h4>
-          <div class="preco">R$ 270,00</div>
+          <div class="preco">R$ 220,00</div>
           <div class="desc">Hospedagem, alimentação e material de apoio (3 dias)</div>
         </div>
         <div class="price-card destaque">
           <span class="badge">⭐ PREMIUM</span>
           <h4>Individual + Camiseta TC</h4>
-          <div class="preco">R$ 320,00</div>
+          <div class="preco">R$ 270,00</div>
           <div class="desc">Tudo do Individual + Camiseta Oficial do TC</div>
         </div>
       </div>
@@ -120,19 +120,15 @@
       <div class="price-grid">
         <div class="price-card">
           <h4>Combo Família</h4>
-          <div class="preco">R$ 490,00</div>
+          <div class="preco">R$ 390,00</div>
           <div class="desc">2 inscrições em um único pagamento</div>
         </div>
         <div class="price-card destaque">
           <span class="badge">⭐ PREMIUM</span>
           <h4>Combo Família + 2 Camisetas</h4>
-          <div class="preco">R$ 590,00</div>
+          <div class="preco">R$ 490,00</div>
           <div class="desc">2 inscrições + 2 Camisetas Oficiais do TC</div>
         </div>
-      </div>
-
-      <div class="note-box" style="margin-top:8px;">
-        <b>Cupom IDE:</b> Desconto especial disponível no momento da pré-inscrição para quem possui o cupom.
       </div>
     </div>
   </section>
@@ -151,12 +147,7 @@
           <div class="field"><label>CPF *</label><input type="text" id="pre-cpf" required></div>
           <div class="field"><label>Igreja / Congregação</label><input type="text" id="pre-igreja"></div>
           <div class="field"><label>Cidade *</label><input type="text" id="pre-cidade" required></div>
-          <div class="field full">
-            <label>Cupom IDE <span class="opt">(opcional)</span></label>
-            <input type="text" id="pre-cupom" placeholder="Ex: IDETC011" style="text-transform:uppercase;">
-          </div>
         </div>
-        <p id="cupom-erro" style="color:#c0392b;font-size:13px;display:none;margin-bottom:16px;">Cupom inválido. Verifique e tente novamente.</p>
         <button type="submit" class="btn btn-gold btn-block" style="padding:18px;margin-top:16px;">Confirmar pré-inscrição →</button>
       </form>
     </div>
@@ -176,7 +167,6 @@
   </header>
   <section class="section section--paper">
     <div class="wrap" style="max-width:680px;">
-      <div id="badge-cupom" style="display:none;background:rgba(166,135,61,.12);border:1px solid var(--gold);color:var(--gold);padding:10px 16px;font-family:var(--mono);font-size:13px;margin-bottom:24px;">🎟️ Cupom IDE ativo — desconto aplicado</div>
       <a href="https://docs.google.com/forms/d/1nebGHqg_fOYjZAhwLN5Kt0ipovRCpSgY4r-V4PDIJM8/viewform" target="_blank" class="btn btn-gold btn-block" style="padding:18px;justify-content:center;margin-bottom:14px;">Preencher Ficha Completa no Google Forms</a>
       <p style="font-size:13px;color:var(--stone);text-align:center;margin-bottom:28px;">Preencha o formulário e volte aqui.</p>
       <hr style="border:none;border-top:1px solid var(--line);margin-bottom:24px;">
@@ -197,31 +187,30 @@
   </header>
   <section class="section section--paper">
     <div class="wrap" style="max-width:680px;">
-      <div id="badge-cupom2" style="display:none;background:rgba(166,135,61,.12);border:1px solid var(--gold);color:var(--gold);padding:10px 16px;font-family:var(--mono);font-size:13px;margin-bottom:24px;">🎟️ Cupom IDE ativo — preços especiais desbloqueados</div>
 
-      <div id="planos-normais">
-        <p class="eyebrow" style="margin-bottom:12px;">Individuais</p>
-        <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Individual','270','ind_normal')"><h4>Individual</h4><div class="plan-price">R$ 270,00</div></div>
-          <div class="plan-card" onclick="selectPlan(this,'Individual Premium + Camiseta TC','320','ind_premium')"><h4>Individual Premium</h4><div class="plan-price">R$ 320,00</div><div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div></div>
+      <p class="eyebrow" style="margin-bottom:12px;">Individuais</p>
+      <div class="plan-grid">
+        <div class="plan-card" onclick="selectPlan(this,'Individual','220','ind_normal')">
+          <h4>Individual</h4>
+          <div class="plan-price">R$ 220,00</div>
         </div>
-        <p class="eyebrow" style="margin-bottom:12px;">Combo Família</p>
-        <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família (2 pessoas)','490','combo_normal')"><h4>Combo Família</h4><div class="plan-price">R$ 490,00</div></div>
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família Premium + 2 Camisetas TC','590','combo_premium')"><h4>Combo Família Premium</h4><div class="plan-price">R$ 590,00</div><div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div></div>
+        <div class="plan-card" onclick="selectPlan(this,'Individual Premium + Camiseta TC','270','ind_premium')">
+          <h4>Individual Premium</h4>
+          <div class="plan-price">R$ 270,00</div>
+          <div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div>
         </div>
       </div>
 
-      <div id="planos-ide" style="display:none;">
-        <p class="eyebrow" style="margin-bottom:12px;">Individuais — Cupom IDE</p>
-        <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Individual com Cupom IDE','220','ind_ide')"><h4>Individual IDE</h4><div class="plan-price">R$ 220,00</div></div>
-          <div class="plan-card" onclick="selectPlan(this,'Individual IDE Premium + Camiseta TC','270','ind_ide_premium')"><h4>Individual IDE Premium</h4><div class="plan-price">R$ 270,00</div><div style="font-size:12px;color:var(--stone);">+ Camiseta TC</div></div>
+      <p class="eyebrow" style="margin-bottom:12px;">Combo Família</p>
+      <div class="plan-grid">
+        <div class="plan-card" onclick="selectPlan(this,'Combo Família (2 pessoas)','390','combo_normal')">
+          <h4>Combo Família</h4>
+          <div class="plan-price">R$ 390,00</div>
         </div>
-        <p class="eyebrow" style="margin-bottom:12px;">Combo Família — Cupom IDE</p>
-        <div class="plan-grid">
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família com Cupom IDE (2 pessoas)','390','combo_ide')"><h4>Combo Família IDE</h4><div class="plan-price">R$ 390,00</div></div>
-          <div class="plan-card" onclick="selectPlan(this,'Combo Família IDE Premium + 2 Camisetas','490','combo_ide_premium')"><h4>Combo Família IDE Premium</h4><div class="plan-price">R$ 490,00</div><div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div></div>
+        <div class="plan-card" onclick="selectPlan(this,'Combo Família Premium + 2 Camisetas TC','490','combo_premium')">
+          <h4>Combo Família Premium</h4>
+          <div class="plan-price">R$ 490,00</div>
+          <div style="font-size:12px;color:var(--stone);">+ 2 Camisetas TC</div>
         </div>
       </div>
 
@@ -293,19 +282,14 @@
 </footer>
 
 <script>
-const CUPOM = "IDETC011";
 const WA = "5535991124957";
 const CARDS = {
-  ind_normal:"https://link.infinitepay.io/matheus-gileade/VC1D-qbntBxZFFb-250,00",
-  ind_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-QrifkU9Wkk-300,00",
-  combo_normal:"https://link.infinitepay.io/matheus-gileade/VC1D-WSeSIrCRHG-450,00",
-  combo_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-QY1KmnN4jf-530,00",
-  ind_ide:"https://link.infinitepay.io/matheus-gileade/VC1D-X6Ser7O3b9-200,00",
-  ind_ide_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-qbntBxZFFb-250,00",
-  combo_ide:"https://link.infinitepay.io/matheus-gileade/VC1D-aeVxZrcZYo-350,00",
-  combo_ide_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-8miEuO4xmQ-430,00"
+  ind_normal:"https://link.infinitepay.io/matheus-gileade/VC1D-X6Ser7O3b9-200,00",
+  ind_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-qbntBxZFFb-250,00",
+  combo_normal:"https://link.infinitepay.io/matheus-gileade/VC1D-aeVxZrcZYo-350,00",
+  combo_premium:"https://link.infinitepay.io/matheus-gileade/VC1D-8miEuO4xmQ-430,00"
 };
-let st = {nome:'',tel:'',cpf:'',igor:'',cid:'',cupomOk:false,plano:'',planoKey:'',val:''};
+let st = {nome:'',tel:'',cpf:'',igor:'',cid:'',plano:'',planoKey:'',val:''};
 
 function goTo(n){
   [1,2,3,4].forEach(i=>{
@@ -317,30 +301,18 @@ function goTo(n){
 
 document.getElementById('form-pre').addEventListener('submit',function(e){
   e.preventDefault();
-  var cupom = document.getElementById('pre-cupom').value.trim().toUpperCase();
-  var err = document.getElementById('cupom-erro');
-  if(cupom && cupom !== CUPOM){ err.style.display='block'; return; }
-  err.style.display='none';
   st.nome=document.getElementById('pre-nome').value;
   st.tel=document.getElementById('pre-tel').value;
   st.cpf=document.getElementById('pre-cpf').value;
   st.igor=document.getElementById('pre-igreja').value||'Não informada';
   st.cid=document.getElementById('pre-cidade').value;
-  st.cupomOk=cupom===CUPOM;
 
   var msg=encodeURIComponent(
-    '🔔 *PRÉ-INSCRIÇÃO TC*\n\n'+
+    '🔔 *PRÉ-INSCRIÇÃO TC11*\n\n'+
     '👤 Nome: '+st.nome+'\n📱 Telefone: '+st.tel+'\n🪪 CPF: '+st.cpf+
-    '\n⛪ Igreja: '+st.igor+'\n📍 Cidade: '+st.cid+
-    '\n🎟️ Cupom: '+(st.cupomOk?CUPOM+' ✅':'Sem cupom')
+    '\n⛪ Igreja: '+st.igor+'\n📍 Cidade: '+st.cid
   );
   window.open('https://wa.me/'+WA+'?text='+msg,'_blank');
-
-  document.querySelectorAll('#badge-cupom,#badge-cupom2').forEach(function(b){
-    b.style.display=st.cupomOk?'block':'none';
-  });
-  document.getElementById('planos-normais').style.display=st.cupomOk?'none':'block';
-  document.getElementById('planos-ide').style.display=st.cupomOk?'block':'none';
   goTo(2);
 });
 
@@ -363,7 +335,7 @@ function selectPay(m,el){
   var p2n=document.getElementById('p2-nome')?document.getElementById('p2-nome').value:'';
   var p2t=document.getElementById('p2-tel')?document.getElementById('p2-tel').value:'';
   var isCombo=st.planoKey.startsWith('combo');
-  var msgC='✅ *COMPROVANTE TC*\n\n👤 '+st.nome+'\n📱 '+st.tel+'\n🪪 '+st.cpf+
+  var msgC='✅ *COMPROVANTE TC11*\n\n👤 '+st.nome+'\n📱 '+st.tel+'\n🪪 '+st.cpf+
     '\n📦 Plano: '+st.plano+'\n💰 R$ '+st.val+',00\n💳 '+(m==='pix'?'PIX':'Cartão');
   if(isCombo&&p2n) msgC+='\n\n👤 2º: '+p2n+' — '+p2t;
   msgC+='\n\n📎 Comprovante em anexo.';
